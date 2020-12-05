@@ -1,0 +1,7 @@
+{
+  "name": "machwas-ui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
