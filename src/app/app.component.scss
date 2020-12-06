@@ -74,6 +74,7 @@ ion-menu.ios ion-content {
 
 ion-menu.ios ion-list {
   padding: 20px 0 0 0;
+  background: transparent;
 }
 
 ion-menu.ios ion-note {
@@ -85,6 +86,7 @@ ion-menu.ios ion-item {
   --padding-start: 16px;
   --padding-end: 16px;
   --min-height: 50px;
+  --background: transparent;
 }
 
 ion-menu.ios ion-item.selected ion-icon {

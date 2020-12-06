@@ -1,5 +1,5 @@
 {
-  "appId": "com.booking.machwas",
+  "appId": "io.ionic.starter",
   "appName": "machwas-ui",
   "bundledWebRuntime": false,
   "npmClient": "npm",
