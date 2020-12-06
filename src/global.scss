@@ -25,3 +25,21 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import "./assets/fonts/stylesheet.css";
+
+ion-content {
+  --background: linear-gradient(
+    to top,
+    rgb(255, 82, 64) 0%,
+    rgb(255, 33, 97) 60%,
+    rgb(255, 0, 119) 100%
+  );
+}
+
+.btn {
+  &__white {
+    color: #fff;
+    font-weight: normal;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+}
