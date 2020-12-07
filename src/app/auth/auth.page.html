@@ -1,4 +1,10 @@
 <ion-content class="auth">
+  <div class="auth__wave--bg">
+    &nbsp;
+  </div>
+  <div class="auth__wave">
+    <img src="./../../assets/images/wave.svg" alt="Wave" class="auth__wave--svg">
+  </div>
   <div class="auth__logo">machWas</div>
 
   <div class="auth__welcome">
@@ -14,10 +20,24 @@
     </div>
 
     <div class="form__btn">
-      <a href="javascript:void(0)" class="btn btn__white">Continue &rarr;</a>
+      <ion-button size="small" fill="outline" color="light" class="form__btn--continue" routerLink="/auth/register">
+        Continue &rarr;</ion-button>
     </div>
 
-    <div class="form__text">OR</div>
+    <div class="form__text">
+      OR
+    </div>
 
+    <div class="form__login login">
+      <div class="form__login--instagram login__insta">
+        <img src="./../../assets/images/insta-icon.svg" alt="Insta" class="login__icon">
+        <div class="login__text">Login with Instagram</div>
+      </div>
+
+      <div class="form__login--mobile login__mobile">
+        <img src="./../../assets/images/phone-icon.svg" alt="Mobile" class="login__icon">
+        <div class="login__text">Login with Mobile</div>
+      </div>
+    </div>
   </div>
 </ion-content>

@@ -43,3 +43,27 @@ ion-content {
     text-decoration: none;
   }
 }
+
+.wave {
+  position: relative;
+
+  &__wrap {
+    position: fixed;
+    bottom: 2rem;
+    width: 100%;
+    display: flex;
+  }
+
+  &__svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__bg {
+    position: fixed;
+    bottom: 0;
+    height: 2.25rem;
+    width: 100%;
+    background-color: #fff;
+  }
+}

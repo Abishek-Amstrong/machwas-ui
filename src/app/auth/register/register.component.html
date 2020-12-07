@@ -1,13 +1,47 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Welcome</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="register wave">
+  <div class="wave__bg">
+    &nbsp;
+  </div>
+  <div class="wave__wrap">
+    <img src="./../../assets/images/wave.svg" alt="Wave" class="wave__svg">
+  </div>
 
-  <div id="container">
-    <strong class="capitalize">Welcome</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
-        Components</a></p>
+  <div class="register__body">
+    <div class="register__header">Create Account</div>
+    <div class="register__avatar">
+      <img src="./../../../assets/images/avatar.png" alt="Avatar" class="register__avatar--img">
+    </div>
+
+    <div class="register__form form">
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="Mobile No" required></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="Email" required></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="D.O.B" required></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="Employment" required></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-textarea rows="4" placeholder="Description"></ion-textarea>
+        </ion-item>
+      </div>
+    </div>
   </div>
 </ion-content>
