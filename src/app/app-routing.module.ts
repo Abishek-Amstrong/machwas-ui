@@ -22,6 +22,18 @@ const routes: Routes = [
     loadChildren: () =>
       import("./tabs/tabs.module").then((m) => m.TabsPageModule),
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'messaging',
+    loadChildren: () => import('./messaging/messaging.module').then( m => m.MessagingPageModule)
+  },
+  {
+    path: 'groups',
+    loadChildren: () => import('./groups/groups.module').then( m => m.GroupsPageModule)
+  },
 ];
 
 @NgModule({

@@ -16,6 +16,37 @@ const routes: Routes = [
           ),
       },
       {
+        path: "groups",
+        loadChildren: () =>
+          import("../groups/groups.module").then((m) => m.GroupsPageModule),
+      },
+      {
+        path: "messaging",
+        loadChildren: () =>
+          import("../messaging/messaging.module").then(
+            (m) => m.MessagingPageModule
+          ),
+      },
+      {
+        path: "profile",
+        loadChildren: () =>
+          import("../profile/profile.module").then((m) => m.ProfilePageModule),
+      },
+      {
+        path: "event",
+        loadChildren: () =>
+          import("../activities/details/details.module").then(
+            (m) => m.DetailsPageModule
+          ),
+      },
+      {
+        path: "event/:title",
+        loadChildren: () =>
+          import("../activities/details/details.module").then(
+            (m) => m.DetailsPageModule
+          ),
+      },
+      {
         path: "",
         redirectTo: "/home/activities",
         pathMatch: "full",

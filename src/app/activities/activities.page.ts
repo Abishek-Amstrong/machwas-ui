@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-activities",
@@ -8,7 +9,7 @@ import { Component, OnInit } from "@angular/core";
 export class ActivitiesPage implements OnInit {
   activities: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.activities = [
       { imageUrl: "assets/images/go-out.jpg", title: "Go Out" },
       { imageUrl: "assets/images/travel.jpg", title: "Travel" },
@@ -24,4 +25,8 @@ export class ActivitiesPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  displayCardDetails(activity: string) {
+    this.router.navigate(["/", "home", "event", activity]);
+  }
 }

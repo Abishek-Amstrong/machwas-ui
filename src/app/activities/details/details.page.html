@@ -1,0 +1,49 @@
+<ion-content class="event">
+  <form [formGroup]="eventForm" class="event__form form">
+    <div class="form__when">When?</div>
+
+    <div class="form__group">
+      <ion-item>
+        <ion-datetime displayFormat="DD-MMM-YY HH:mm" formControlName="eventTime" required placeholder="When?">
+        </ion-datetime>
+      </ion-item>
+    </div>
+
+    <div class="form__with">With Who?</div>
+
+    <div class="form__group">
+      <ion-item>
+        <ion-input type="text" formControlName="friendsList" placeholder="Tag your friends" required></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form__stories">
+      <img src="./../../../assets/images/male.svg" alt="Male" class="form__tag">
+      <img src="./../../../assets/images/female.svg" alt="Female" class="form__tag">
+      <img src="./../../../assets/images/profile.svg" alt="Profile" class="form__tag">
+    </div>
+
+    <div class="form__where">Where?</div>
+
+    <div class="form__group">
+      <ion-item>
+        <ion-input type="text" formControlName="location" placeholder="Event Location" required></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form__unknown">
+      <a href="javascript:void(0)" class="form__unknown-location">I dont know..</a>
+    </div>
+
+    <div class="form__group form__action">
+      <a href="javascript:void(0)" class="form__continue btn-continue">
+        Continue
+        <span class="form__continue-arrow">
+          <i class="material-icons">
+            chevron_right
+          </i>
+        </span>
+      </a>
+    </div>
+  </form>
+</ion-content>
