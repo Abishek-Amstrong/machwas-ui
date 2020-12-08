@@ -26,7 +26,7 @@
     font-family: "chewyregular";
     font-size: 3rem;
     text-align: center;
-    margin: 10% 0;
+    margin: 20% 0;
   }
 
   &__welcome {
@@ -80,6 +80,7 @@
     border-radius: 0.5rem;
     margin: auto;
     position: relative;
+    cursor: pointer;
 
     img {
       height: 3rem;

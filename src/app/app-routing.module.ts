@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "auth",
+    redirectTo: "home",
     pathMatch: "full",
   },
   {
@@ -13,8 +13,14 @@ const routes: Routes = [
       import("./auth/auth.module").then((m) => m.AuthPageModule),
   },
   {
-    path: 'shared',
-    loadChildren: () => import('./shared/shared.module').then( m => m.SharedPageModule)
+    path: "shared",
+    loadChildren: () =>
+      import("./shared/shared.module").then((m) => m.SharedPageModule),
+  },
+  {
+    path: "home",
+    loadChildren: () =>
+      import("./tabs/tabs.module").then((m) => m.TabsPageModule),
   },
 ];
 

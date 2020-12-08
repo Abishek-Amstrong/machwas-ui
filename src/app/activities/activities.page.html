@@ -1,0 +1,16 @@
+<ion-header class="activity__header">
+  <ion-toolbar class="activity__toolbar">
+    <ion-title class="activity__title">What do you want to do?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="activity__body">
+  <ion-searchbar class="activity__search"></ion-searchbar>
+
+  <div class="activity__content">
+    <div class="activity__card" *ngFor="let activity of activities;">
+      <div class="activity__img" [style.background-image]="'url(' + activity.imageUrl + ')'"></div>
+      <span class="activity__text">{{activity.title | uppercase }}</span>
+    </div>
+  </div>
+</ion-content>

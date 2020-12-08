@@ -26,13 +26,52 @@
 @import "~@ionic/angular/css/flex-utils.css";
 @import "./assets/fonts/stylesheet.css";
 
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url(assets/fonts/MaterialIcons-Regular.ttf) format("truetype"),
+    url(assets/fonts/MaterialIconsOutlined-Regular.otf) format("opentype");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+}
+
 ion-content {
-  --background: linear-gradient(
-    to top,
-    rgb(255, 82, 64) 0%,
-    rgb(255, 33, 97) 60%,
-    rgb(255, 0, 119) 100%
-  );
+  // --background: linear-gradient(
+  //   to top,
+  //   rgb(255, 82, 64) 0%,
+  //   rgb(255, 33, 97) 60%,
+  //   rgb(255, 0, 119) 100%
+  // );
+  --background: linear-gradient(to bottom, rgb(255, 0, 119), rgb(255, 82, 64));
+}
+
+ion-toolbar {
+  --background: linear-gradient(to right, rgb(255, 0, 119), rgb(255, 82, 64));
 }
 
 .btn {
@@ -49,7 +88,7 @@ ion-content {
 
   &__wrap {
     position: fixed;
-    bottom: 2rem;
+    bottom: 1rem;
     width: 100%;
     display: flex;
   }
@@ -62,7 +101,7 @@ ion-content {
   &__bg {
     position: fixed;
     bottom: 0;
-    height: 2.25rem;
+    height: 1.25rem;
     width: 100%;
     background-color: #fff;
   }

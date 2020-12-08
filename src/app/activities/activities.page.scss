@@ -1,0 +1,54 @@
+ion-content {
+  //   --background: var(--ion-color-light);
+  --background: url("./../../assets/images/whatsapp.png");
+}
+
+.activity {
+  &__title {
+    text-align: center;
+  }
+
+  &__search {
+    padding: 1rem;
+    --border-radius: 2rem;
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: calc(100vh - 12rem);
+    overflow-y: scroll;
+  }
+
+  &__card {
+    flex: 0 0 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    & > * {
+      margin-bottom: 1.5rem;
+    }
+
+    span {
+      position: absolute;
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      height: calc(100% - 1.5rem);
+      align-items: center;
+      font-style: italic;
+    }
+  }
+
+  &__img {
+    width: 90%;
+    height: 5rem;
+    border-radius: 0.75rem;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5);
+  }
+}
