@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home",
+    redirectTo: "auth",
     pathMatch: "full",
   },
   {
@@ -23,16 +23,19 @@ const routes: Routes = [
       import("./tabs/tabs.module").then((m) => m.TabsPageModule),
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    path: "profile",
+    loadChildren: () =>
+      import("./profile/profile.module").then((m) => m.ProfilePageModule),
   },
   {
-    path: 'messaging',
-    loadChildren: () => import('./messaging/messaging.module').then( m => m.MessagingPageModule)
+    path: "messaging",
+    loadChildren: () =>
+      import("./messaging/messaging.module").then((m) => m.MessagingPageModule),
   },
   {
-    path: 'groups',
-    loadChildren: () => import('./groups/groups.module').then( m => m.GroupsPageModule)
+    path: "groups",
+    loadChildren: () =>
+      import("./groups/groups.module").then((m) => m.GroupsPageModule),
   },
 ];
 

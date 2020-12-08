@@ -29,14 +29,16 @@
     </div>
 
     <div class="form__login login">
-      <div class="form__login--instagram login__insta">
+      <div class="form__login--instagram login__insta ion-activatable ripple-parent" (click)="navToActivities()">
         <img src="./../../assets/images/insta-icon.svg" alt="Insta" class="login__icon">
         <div class="login__text">Login with Instagram</div>
+        <ion-ripple-effect></ion-ripple-effect>
       </div>
 
-      <div class="form__login--mobile login__mobile">
+      <div class="form__login--mobile login__mobile ion-activatable ripple-parent" (click)="navToActivities()">
         <img src="./../../assets/images/phone-icon.svg" alt="Mobile" class="login__icon">
         <div class="login__text">Login with Mobile</div>
+        <ion-ripple-effect></ion-ripple-effect>
       </div>
     </div>
   </div>
