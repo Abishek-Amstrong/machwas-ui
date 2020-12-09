@@ -1,0 +1,52 @@
+.profile {
+  .slide {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__img {
+      height: 12.5rem;
+      margin: 2rem 0;
+      border: 10px solid var(--ion-color-primary-tint);
+      border-radius: 50%;
+    }
+
+    &__name {
+      padding: 1rem 0 0.25rem;
+      margin-bottom: 0;
+    }
+
+    &__location {
+      font-size: 14px;
+      margin-bottom: 2rem;
+    }
+
+    &__about {
+      font-size: 14px;
+      line-height: 1.5;
+      width: 20rem;
+    }
+
+    &__prev,
+    &__next {
+      position: absolute;
+      top: 50%;
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    &__prev {
+      left: 1rem;
+    }
+
+    &__next {
+      right: 1rem;
+    }
+  }
+}
