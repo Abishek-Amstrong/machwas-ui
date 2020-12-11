@@ -29,4 +29,8 @@ export class DetailsPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  navToEvents() {
+    this.router.navigate(["/", "home", "events"]);
+  }
 }
