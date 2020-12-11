@@ -24,7 +24,7 @@ ion-content {
   }
 
   &__slider {
-    margin: 2rem;
+    margin: 2rem 1rem;
     margin-top: 4rem;
     padding: 1rem;
   }
@@ -34,6 +34,12 @@ ion-content {
     flex-direction: column;
     position: relative;
     min-height: 400px;
+    justify-content: flex-start;
+    align-items: start;
+
+    & > * {
+      padding: 0.5rem 0.5rem 0 2rem;
+    }
 
     &__img {
       position: absolute;
@@ -43,18 +49,20 @@ ion-content {
       filter: brightness(0.5);
       width: 100%;
       height: 100%;
+      padding: 0 !important;
     }
 
     &__activity {
       padding: 1rem 0 0.25rem;
       margin-bottom: 0;
       z-index: 999;
+      margin-top: 2.5rem;
     }
 
     &__location {
-      font-size: 14px;
-      margin-bottom: 2rem;
+      font-size: 20px;
       z-index: 999;
+      margin-bottom: 1rem;
     }
 
     &__about {
@@ -62,11 +70,13 @@ ion-content {
       line-height: 1.5;
       width: 20rem;
       z-index: 999;
+      text-align: left;
     }
 
     &__date {
       font-size: 12px;
       z-index: 999;
+      color: #ddd;
     }
 
     &__prev,
