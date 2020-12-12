@@ -8,6 +8,7 @@ import { SharedPageRoutingModule } from "./shared-routing.module";
 
 import { SharedPage } from "./shared.page";
 import { AngularMaterialModule } from "./angular-material.module";
+import { TinderUIComponent } from "./components/event-swipes/event-swipes.component";
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { AngularMaterialModule } from "./angular-material.module";
     SharedPageRoutingModule,
     AngularMaterialModule,
   ],
-  declarations: [SharedPage],
+  declarations: [SharedPage, TinderUIComponent],
 })
 export class SharedPageModule {}

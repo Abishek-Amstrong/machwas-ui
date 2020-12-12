@@ -8,6 +8,7 @@ import { EventsPageRoutingModule } from "./events-routing.module";
 
 import { EventsPage } from "./events.page";
 import { AngularMaterialModule } from "../shared/angular-material.module";
+import { TinderUIComponent } from "../shared/components/event-swipes/event-swipes.component";
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { AngularMaterialModule } from "../shared/angular-material.module";
     EventsPageRoutingModule,
     AngularMaterialModule,
   ],
-  declarations: [EventsPage],
+  declarations: [EventsPage, TinderUIComponent],
 })
 export class EventsPageModule {}
