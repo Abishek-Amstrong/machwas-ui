@@ -28,11 +28,6 @@ const routes: Routes = [
       import("./profile/profile.module").then((m) => m.ProfilePageModule),
   },
   {
-    path: "messaging",
-    loadChildren: () =>
-      import("./messaging/messaging.module").then((m) => m.MessagingPageModule),
-  },
-  {
     path: "groups",
     loadChildren: () =>
       import("./groups/groups.module").then((m) => m.GroupsPageModule),

@@ -1,0 +1,70 @@
+ion-content {
+  --background: #fff;
+}
+
+.messaging {
+  &__search {
+    padding: 1rem;
+    --border-radius: 2rem;
+    --color: var(--ion-color-primary);
+  }
+
+  &__new {
+    font-size: 16px;
+    color: #333;
+    padding: 0 2rem;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 11rem);
+    overflow-y: auto;
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 1rem;
+      border-bottom: 1px solid whitesmoke;
+      padding: 0.6rem 1rem;
+
+      & > * {
+        color: var(--ion-color-danger);
+      }
+
+      &__avatar {
+        width: 3.25rem;
+        height: 3.25rem;
+        background-size: cover;
+        background-position: center;
+        margin-right: 1.5rem;
+        flex: 0 0 auto;
+      }
+
+      &__msg-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+      }
+
+      &__time {
+        flex: 0 0 10%;
+        display: flex;
+        align-items: flex-end;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ion-color-tertiary) !important;
+      }
+
+      &__name {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+
+      &__msg {
+        font-size: 14px;
+      }
+    }
+  }
+}

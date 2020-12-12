@@ -1,9 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>messaging</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="messaging">
+  <ion-searchbar class="messaging__search" placeholder="Type a message"></ion-searchbar>
 
-<ion-content>
+  <div class="messaging__new">New Messages</div>
 
+  <div class="messaging__cards">
+    <div class="messaging__card card" *ngFor="let message of messages">
+      <div class="card__avatar" [style.background-image]="'url(' + message.imgUrl + ')'">&nbsp;</div>
+      <div class="card__msg-wrap">
+        <div class=" card__name">{{message.name}}</div>
+        <div class="card__msg">{{message.msg}}</div>
+      </div>
+      <div class="card__time">{{message.time}}</div>
+    </div>
+  </div>
 </ion-content>
