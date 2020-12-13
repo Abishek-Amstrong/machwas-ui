@@ -3,6 +3,8 @@ ion-content {
 }
 
 .messaging {
+  position: relative;
+
   &__search {
     padding: 1rem;
     --border-radius: 2rem;
@@ -25,16 +27,19 @@ ion-content {
       display: flex;
       justify-content: space-between;
       margin: 0 1rem;
-      border-bottom: 1px solid whitesmoke;
-      padding: 0.6rem 1rem;
+      padding: 0.75rem 1rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid whitesmoke;
+      }
 
       & > * {
         color: var(--ion-color-danger);
       }
 
       &__avatar {
-        width: 3.25rem;
-        height: 3.25rem;
+        width: 3.75rem;
+        height: 3.75rem;
         background-size: cover;
         background-position: center;
         margin-right: 1.5rem;
@@ -53,7 +58,7 @@ ion-content {
         display: flex;
         align-items: flex-end;
         font-size: 11px;
-        font-weight: 500;
+        font-weight: 600;
         color: var(--ion-color-tertiary) !important;
       }
 
@@ -66,5 +71,18 @@ ion-content {
         font-size: 14px;
       }
     }
+  }
+
+  &__bg {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    z-index: -1;
+    height: 5rem;
+    background: linear-gradient(to bottom, rgb(255, 0, 119), rgb(255, 82, 64));
+    mask-image: url(./../../assets/images/wave.svg);
+    mask-size: cover;
+    transform: translate(-10px, 0) scale(1.5);
   }
 }
