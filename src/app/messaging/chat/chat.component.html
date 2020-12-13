@@ -1,0 +1,41 @@
+<ion-header class="chat__header" color="light">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="/home/messaging"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="chat__title">
+      <div class="chat__avatars">
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide *ngFor="let profile of profiles">
+            <div class="chat__avatar">&nbsp;</div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat__body">
+  <div class="chat__cards">
+    <div class="chat__card" *ngFor="let chat of chats" [ngClass]="{'chat__my-texts': chat.from==='me' }">
+      <div class="chat__img">&nbsp;</div>
+      <div class="chat__bg">
+        <div class="chat__msg">{{chat.msg}}</div>
+        <div class="chat__time">{{chat.time}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat__keyboard">
+    <ion-item>
+      <ion-input placeholder="Type a message" color="danger"></ion-input>
+    </ion-item>
+
+    <div class="chat__sent">
+      <button mat-icon-button color="primary">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+</ion-content>

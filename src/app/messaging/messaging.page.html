@@ -4,7 +4,7 @@
   <div class="messaging__new">New Messages</div>
 
   <div class="messaging__cards">
-    <div class="messaging__card card" *ngFor="let message of messages">
+    <div class="messaging__card card" *ngFor="let message of messages" (click)="navToChat()">
       <div class="card__avatar" [style.background-image]="'url(' + message.imgUrl + ')'">&nbsp;</div>
       <div class="card__msg-wrap">
         <div class=" card__name">{{message.name}}</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-messaging",
@@ -8,7 +9,7 @@ import { Component, OnInit } from "@angular/core";
 export class MessagingPage implements OnInit {
   messages: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.messages = [
       {
         imgUrl: "assets/images/female.svg",
@@ -74,4 +75,8 @@ export class MessagingPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  navToChat() {
+    this.router.navigate(["/", "chat"]);
+  }
 }
