@@ -1,6 +1,6 @@
 {
-  "appId": "com.booking.machwas",
-  "appName": "machwas-ui",
+  "appId": "com.booking.machWas",
+  "appName": "machWas-ui",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
