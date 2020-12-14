@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.booking.machWas;
 
 import android.os.Bundle;
 
