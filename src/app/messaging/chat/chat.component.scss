@@ -54,7 +54,7 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
     border-radius: 0.75rem;
     background: #fff;
-    color: var(--ion-color-primary);
+    color: var(--ion-color-secondary-tint);
     max-width: 60%;
     padding: 0.75rem;
     position: relative;
@@ -72,7 +72,7 @@
     }
 
     .chat__bg {
-      background: #00b0ff;
+      background: darken(#ff6353, 10);
       color: #fff;
     }
 
@@ -130,7 +130,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #00b0ff;
+    background: darken(#ff6353, 10);
 
     .mat-icon {
       color: #fff;
