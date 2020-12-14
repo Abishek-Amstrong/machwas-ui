@@ -1,4 +1,8 @@
 <ion-content class="profile">
+  <ion-button class="profile__settings" fill="clear">
+    <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
+  </ion-button>
+
   <div class="profile__logo app-logo">
     machWas
   </div>
@@ -7,28 +11,21 @@
     <ion-slides pager="false" [options]="slideOpts" #slider>
       <ion-slide class="slide">
         <img src="./../../assets/images/male-white.svg" alt="Profile" class="profile__img slide__img">
-        <h1 class="slide__name">Abishek Amstrong</h1>
-        <div class="slide__location">Chennai</div>
-        <div class="slide__about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione sit commodi
-          voluptatem.</div>
       </ion-slide>
 
       <ion-slide class="slide">
         <img src="./../../assets/images/profile.svg" alt="Profile" class="profile__img slide__img">
-        <h1 class="slide__name">Akash Dubey</h1>
-        <div class="slide__location">Delhi</div>
-        <div class="slide__about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione sit commodi
-          voluptatem.</div>
       </ion-slide>
 
       <ion-slide class="slide">
         <img src="./../../assets/images/female-white.svg" alt="Profile" class="profile__img slide__img">
-        <h1 class="slide__name">Rahul Bhatia</h1>
-        <div class="slide__location">Pune</div>
-        <div class="slide__about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione sit commodi
-          voluptatem.</div>
       </ion-slide>
     </ion-slides>
+
+    <h1 class="slide__name">Abishek Amstrong</h1>
+    <div class="slide__location">Chennai</div>
+    <div class="slide__about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione sit commodi
+      voluptatem.</div>
 
     <div class="slide__prev ion-activatable ripple-parent" (click)="previousSlide()">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
