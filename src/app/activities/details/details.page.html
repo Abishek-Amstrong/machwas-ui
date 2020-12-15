@@ -35,15 +35,9 @@
       <a href="javascript:void(0)" class="form__unknown-location">I dont know..</a>
     </div>
 
-    <div class="form__group form__action">
-      <a href="javascript:void(0)" class="form__continue btn-continue" (click)="navToEvents()">
-        Continue
-        <span class="form__continue-arrow">
-          <i class="material-icons">
-            chevron_right
-          </i>
-        </span>
-      </a>
+    <div class="form__group form__action ion-activatable ripple-parent">
+      <a href="javascript:void(0)" class="form__continue" (click)="navToEvents()">Continue &rarr;</a>
+      <ion-ripple-effect></ion-ripple-effect>
     </div>
   </form>
 </ion-content>

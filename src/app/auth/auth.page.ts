@@ -14,4 +14,8 @@ export class AuthPage implements OnInit {
   navToActivities() {
     this.router.navigate(["/", "home", "activities"]);
   }
+
+  navToRegister() {
+    this.router.navigate(["/", "auth", "register"]);
+  }
 }

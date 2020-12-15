@@ -39,23 +39,9 @@
 
     &__continue:link,
     &__continue:visited {
-      width: 20rem;
-      text-align: center;
-      text-decoration: none;
       color: #fff;
-      background: #0067cb;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      position: relative;
-
-      span {
-        position: absolute;
-        right: 0.5rem;
-        height: 100%;
-        top: 0;
-        display: flex;
-        align-items: center;
-      }
+      text-decoration: none;
+      font-size: 1rem;
     }
 
     &__stories {

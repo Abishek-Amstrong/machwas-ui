@@ -19,9 +19,9 @@
       </ion-item>
     </div>
 
-    <div class="form__btn">
-      <ion-button size="small" fill="outline" color="light" class="form__btn--continue" routerLink="/auth/register">
-        Continue &rarr;</ion-button>
+    <div class="form__btn ion-activatable ripple-parent">
+      <a href="javascript:void(0)" class="form__btn--continue" (click)="navToRegister()">Continue &rarr;</a>
+      <ion-ripple-effect></ion-ripple-effect>
     </div>
 
     <div class="form__text">

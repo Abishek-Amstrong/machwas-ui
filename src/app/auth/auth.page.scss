@@ -59,8 +59,11 @@
   }
 
   &__btn {
-    &--continue {
+    &--continue:link,
+    &--continue:visited {
       font-size: 0.75rem;
+      color: #fff;
+      text-decoration: none;
     }
   }
 }
