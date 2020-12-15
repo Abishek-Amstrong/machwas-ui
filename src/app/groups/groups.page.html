@@ -1,9 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>groups</ion-title>
+<ion-header class="group__header" color="light">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="/home/messaging"></ion-back-button>
+    </ion-buttons>
+
+    <div class="group__title">
+      <div class="group__friends">Friends</div>
+      <ion-searchbar class="group__search" placeholder="Search..."></ion-searchbar>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content class="group">
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="selectedSegment">
+    <ion-segment-button value="Friends">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="invite">
+      <ion-label>Invite</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="group__cards" *ngIf="selectedSegment === 'Friends'">
+    <div class="group__card card" *ngFor="let c of contacts">
+      <div class="card__avatar">{{c.displayName[0]}}</div>
+
+      <div class="card__contact">
+        <div class="card__name">{{c.displayName}}</div>
+        <div class="card__phone">{{c.phoneNumbers[0]}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group__cards" *ngIf="selectedSegment === 'invite'">
+    <div class="group__card card" *ngFor="let c of contacts">
+      <div class="card__avatar">{{c.displayName[0]}}</div>
+
+      <div class="card__contact">
+        <div class="card__name">{{c.displayName}}</div>
+        <div class="card__phone">{{c.phoneNumbers[0]}}</div>
+      </div>
+
+      <div class="card__invite">
+        <ion-button class="card__invite-btn" fill="clear" size="small">
+          <ion-icon slot="icon-only" name="add" color="tertiary"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

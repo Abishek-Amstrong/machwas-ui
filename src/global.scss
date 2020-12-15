@@ -134,3 +134,12 @@ app-details {
   text-align: center;
   margin: 20% 0;
 }
+
+app-groups {
+  ion-searchbar {
+    input {
+      --box-shadow: none !important;
+      background: #ddd !important;
+    }
+  }
+}

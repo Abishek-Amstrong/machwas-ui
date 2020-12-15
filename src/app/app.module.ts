@@ -11,6 +11,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ChatComponent } from "./messaging/chat/chat.component";
 import { AngularMaterialModule } from "./shared/angular-material.module";
+import { SMS } from "@ionic-native/sms/ngx";
 
 @NgModule({
   declarations: [AppComponent, ChatComponent],
@@ -26,6 +27,7 @@ import { AngularMaterialModule } from "./shared/angular-material.module";
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SMS,
   ],
   bootstrap: [AppComponent],
 })
