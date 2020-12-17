@@ -16,7 +16,7 @@ export class GroupsPage implements OnInit {
   selectedSegment: string;
 
   constructor() {
-    // this.loadContacts();
+    this.loadContacts();
     this.selectedSegment = "Friends";
     // this.contacts = [
     //   {
