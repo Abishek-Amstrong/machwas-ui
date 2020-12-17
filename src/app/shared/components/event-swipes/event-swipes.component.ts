@@ -7,7 +7,9 @@ import {
   EventEmitter,
   Output,
   Renderer2,
+  ViewChild,
 } from "@angular/core";
+import { IonSlides } from "@ionic/angular";
 
 @Component({
   selector: "swipe-ui",
@@ -24,9 +26,11 @@ export class TinderUIComponent {
   }>;
 
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
+  @ViewChild("slider") slider: IonSlides;
   tinderCardsArray: Array<ElementRef>;
 
   @Output() choiceMade = new EventEmitter();
+  profiles: any;
 
   moveOutWidth: number;
   shiftRequired: boolean;
@@ -41,6 +45,15 @@ export class TinderUIComponent {
       speed: 400,
       slidesPerView: 3,
     };
+
+    this.profiles = [
+      { imgUrl: "assets/images/male-white.svg" },
+      { imgUrl: "assets/images/profile.svg" },
+      { imgUrl: "assets/images/female-white.svg" },
+      // { imgUrl: "assets/images/male-white.svg" },
+      // { imgUrl: "assets/images/profile.svg" },
+      // { imgUrl: "assets/images/female-white.svg" },
+    ];
   }
 
   userClickedButton(event, heart) {
@@ -180,5 +193,17 @@ export class TinderUIComponent {
     this.tinderCards.changes.subscribe(() => {
       this.tinderCardsArray = this.tinderCards.toArray();
     });
+  }
+
+  ionSlideWillChange(event: Event) {
+    event.stopPropagation();
+  }
+
+  nextSlide() {
+    this.slider.slideNext();
+  }
+
+  previousSlide() {
+    this.slider.slidePrev();
   }
 }

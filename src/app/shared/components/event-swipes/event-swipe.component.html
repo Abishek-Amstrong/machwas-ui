@@ -31,45 +31,37 @@
             <p class="tinder--card__location">{{ card.location }}</p>
             <p class="tinder--card__description">{{ card.description }}</p>
             <p class="tinder--card__date">{{ card.eventDate }}</p>
-            <div class="slider">
+            <div class="slider" [ngClass]="{'slider__icons': profiles.length > 3}">
                 <ion-slides pager="false" [options]="slideOpts" #slider>
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/male-white.svg" alt="Profile" class="slide__img">
-                    </ion-slide>
-
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/profile.svg" alt="Profile" class="slide__img">
-                    </ion-slide>
-
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/female-white.svg" alt="Profile" class="slide__img">
-                    </ion-slide>
-
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/male-white.svg" alt="Profile" class="slide__img">
-                    </ion-slide>
-
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/profile.svg" alt="Profile" class="slide__img">
-                    </ion-slide>
-
-                    <ion-slide class="slide">
-                        <img src="./../../assets/images/female-white.svg" alt="Profile" class="slide__img">
+                    <ion-slide class="slide" *ngFor="let profile of profiles">
+                        <img [src]="profile.imgUrl" alt="Profile" class="slide__img">
                     </ion-slide>
                 </ion-slides>
+
+                <div class="slider__prev ion-activatable ripple-parent" (click)="previousSlide()"
+                    *ngIf="profiles.length > 3">
+                    <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
+
+                <div class="slider__next ion-activatable ripple-parent" (click)="nextSlide()"
+                    *ngIf="profiles.length > 3">
+                    <ion-icon color="medium" name="chevron-forward-outline"></ion-icon>
+                    <ion-ripple-effect></ion-ripple-effect>
+                </div>
             </div>
 
         </div>
 
         <div class="tinder--buttons">
-            <ion-button shape="round" fill="clear" color="success" size="large"
+            <ion-button shape="round" fill="clear" color="danger" size="large"
                 (click)="userClickedButton($event, false)">
-                <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+                <ion-icon slot="icon-only" name="close-circle"></ion-icon>
             </ion-button>
 
-            <ion-button shape="round" fill="clear" color="danger" size="large"
+            <ion-button shape="round" fill="clear" color="success" size="large"
                 (click)="userClickedButton($event, true)">
-                <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+                <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
             </ion-button>
         </div>
     </div>
