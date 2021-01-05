@@ -56,7 +56,7 @@ export class TinderUIComponent {
     ];
   }
 
-  userClickedButton(event, heart) {
+  userClickedButton(event, heart, action) {
     event.preventDefault();
     if (!this.cards.length) return false;
     if (heart) {

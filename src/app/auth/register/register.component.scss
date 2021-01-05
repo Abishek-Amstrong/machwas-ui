@@ -53,6 +53,19 @@
           text-align: right;
           font-size: smaller;
         }
+
+        &--last {
+          justify-content: flex-end;
+          padding: 0 calc((100% - 20rem) / 2);
+          padding-top: 0.5rem;
+        }
+
+        &--continue:link,
+        &--continue:visited {
+          font-size: 0.75rem;
+          color: #fff;
+          text-decoration: none;
+        }
       }
     }
   }
