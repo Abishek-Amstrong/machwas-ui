@@ -174,3 +174,14 @@
     right: 30%;
   }
 }
+
+.noswipe {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-primary);
+  padding-bottom: 6.5rem;
+  font-size: x-large;
+  font-family: "chewyregular";
+}
