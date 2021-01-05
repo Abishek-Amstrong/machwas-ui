@@ -40,7 +40,11 @@ const routes: Routes = [
   {
     path: "chat/:name",
     component: ChatComponent,
+  },  {
+    path: 'myads',
+    loadChildren: () => import('./myads/myads.module').then( m => m.MyadsPageModule)
   },
+
 ];
 
 @NgModule({

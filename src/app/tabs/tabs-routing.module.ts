@@ -33,6 +33,11 @@ const routes: Routes = [
           import("../profile/profile.module").then((m) => m.ProfilePageModule),
       },
       {
+        path: "myads",
+        loadChildren: () =>
+          import("../myads/myads.module").then((m) => m.MyadsPageModule),
+      },
+      {
         path: "event",
         loadChildren: () =>
           import("../activities/details/details.module").then(
