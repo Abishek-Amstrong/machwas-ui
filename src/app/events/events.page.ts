@@ -21,6 +21,7 @@ export class EventsPage implements OnInit {
   ionViewDidEnter() {
     this.cards = [
       {
+        eventID: 1,
         img: "assets/images/badminton.jpg",
         eventTitle: "Badminton Sat 17:00 IST",
         location: "Chennai",
@@ -28,6 +29,7 @@ export class EventsPage implements OnInit {
         eventDate: "20 March 2020",
       },
       {
+        eventID: 2,
         img: "assets/images/tennis.jpg",
         eventTitle: "Tennis Sat 17:00 IST",
         location: "Delhi",
@@ -35,6 +37,7 @@ export class EventsPage implements OnInit {
         eventDate: "20 March 2020",
       },
       {
+        eventID: 3,
         img: "assets/images/soccer.jpg",
         eventTitle: "Soccer Sat 17:00 IST",
         location: "Mumbai",

@@ -20,6 +20,7 @@ export class TinderUIComponent {
   @Input("cards") cards: Array<{
     img: string;
     eventTitle: string;
+    eventID: any;
     location: string;
     description: string;
     eventDate: string;
@@ -38,6 +39,9 @@ export class TinderUIComponent {
   heartVisible: boolean;
   crossVisible: boolean;
   slideOpts: any;
+  currentAction: string;
+  previousCard: any;
+  isLater: boolean;
 
   constructor(private renderer: Renderer2) {
     this.slideOpts = {
@@ -54,9 +58,14 @@ export class TinderUIComponent {
       // { imgUrl: "assets/images/profile.svg" },
       // { imgUrl: "assets/images/female-white.svg" },
     ];
+
+    this.currentAction = "";
+    this.previousCard = null;
+    this.isLater = false;
   }
 
-  userClickedButton(event, heart, action) {
+  userClickedButton(event, heart, later, action) {
+    this.currentAction = action;
     event.preventDefault();
     if (!this.cards.length) return false;
     if (heart) {
@@ -67,7 +76,8 @@ export class TinderUIComponent {
       );
       this.toggleChoiceIndicator(false, true);
       this.emitChoice(heart, this.cards[0]);
-    } else {
+      this.isLater = false;
+    } else if (later) {
       this.renderer.setStyle(
         this.tinderCardsArray[0].nativeElement,
         "transform",
@@ -75,6 +85,11 @@ export class TinderUIComponent {
       );
       this.toggleChoiceIndicator(true, false);
       this.emitChoice(heart, this.cards[0]);
+      this.isLater = true;
+    } else {
+      this.isLater = false;
+      this.shiftRequired = true;
+      this.handleShift();
     }
     this.shiftRequired = true;
     this.transitionInProgress = true;
@@ -161,6 +176,14 @@ export class TinderUIComponent {
 
       this.shiftRequired = true;
 
+      if (!!(event.deltaX > 0)) {
+        this.isLater = false;
+        this.currentAction = "right";
+      } else {
+        this.isLater = true;
+        this.currentAction = "left";
+      }
+
       this.emitChoice(!!(event.deltaX > 0), this.cards[0]);
     }
     this.transitionInProgress = true;
@@ -174,9 +197,27 @@ export class TinderUIComponent {
   handleShift() {
     this.transitionInProgress = false;
     this.toggleChoiceIndicator(false, false);
-    if (this.shiftRequired) {
+    if (this.shiftRequired && this.currentAction === "return") {
       this.shiftRequired = false;
-      this.cards.shift();
+      if (this.previousCard) {
+        const index = this.cards.findIndex(
+          (card) => card.eventID === this.previousCard.eventID
+        );
+        if (index === -1) {
+          this.cards.unshift(this.previousCard);
+        } else {
+          this.cards.splice(index, 1);
+          this.cards.unshift(this.previousCard);
+        }
+      }
+      this.previousCard = null;
+    } else if (this.shiftRequired) {
+      this.shiftRequired = false;
+      this.previousCard = this.cards.shift();
+
+      if (this.isLater && this.cards.length) {
+        this.cards.push(this.previousCard);
+      }
     }
   }
 

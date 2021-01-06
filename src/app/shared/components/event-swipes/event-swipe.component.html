@@ -55,17 +55,17 @@
 
         <div class="tinder--buttons">
             <ion-button shape="round" fill="clear" color="danger" size="large"
-                (click)="userClickedButton($event, false, 'left')">
+                (click)="userClickedButton($event, false, true, 'left')">
                 <ion-icon slot="icon-only" name="close-circle"></ion-icon>
             </ion-button>
 
-            <ion-button shape="round" fill="clear" color="tertiary" size="large"
-                (click)="userClickedButton($event, false, 'return')">
+            <ion-button shape="round" fill="clear" color="tertiary" size="large" [disabled]="!this.previousCard"
+                (click)="userClickedButton($event, false, false, 'return')">
                 <ion-icon slot="icon-only" name="arrow-undo-circle"></ion-icon>
             </ion-button>
 
             <ion-button shape="round" fill="clear" color="success" size="large"
-                (click)="userClickedButton($event, true, 'right')">
+                (click)="userClickedButton($event, true, false, 'right')">
                 <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
             </ion-button>
         </div>
