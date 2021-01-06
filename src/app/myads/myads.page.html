@@ -1,9 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>myads</ion-title>
+<ion-header class="advertisement__header">
+  <ion-toolbar class="advertisement__toolbar">
+    <ion-title class="activity__title">My Events</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="advertisement__body">
+  <ion-searchbar class="advertisement__search"></ion-searchbar>
 
+  <div class="advertisement__content">
+    <div class="advertisement__card card" *ngFor="let event of events;">
+      <div class="card__left">
+        <div class="card__img" [style.background-image]="'url(' + event.imgUrl + ')'">&nbsp;</div>
+        <div class="card__name">{{event.hostName}}</div>
+      </div>
+      <div class="card__main">
+        <div class="card__location">
+          <div class="card__location-icon">
+            <i class="material-icons">location_on</i>
+          </div>
+          <div class="card__location-text">{{event.location}}</div>
+        </div>
+
+        <div class="card__date">
+          <div class="card__date-icon">
+            <i class="material-icons">event</i>
+          </div>
+          <div class="card__date-text">{{event.eventDate}}</div>
+        </div>
+
+        <div class="card__time">
+          <div class="card__time-icon">
+            <i class="material-icons">access_time</i>
+          </div>
+          <div class="card__time-text">{{event.time}}</div>
+        </div>
+      </div>
+      <div class="card__right">
+        <div class="card__count">{{event.going}}</div>
+        <div class="card__going">going</div>
+      </div>
+    </div>
+  </div>
 </ion-content>

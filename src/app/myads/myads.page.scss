@@ -1,0 +1,121 @@
+ion-content {
+  //   --background: var(--ion-color-light);
+  --background: url("./../../assets/images/whatsapp.png");
+}
+
+.advertisement {
+  &__title {
+    text-align: center;
+  }
+
+  &__search {
+    padding: 0.5rem;
+    --border-radius: 2rem;
+  }
+
+  &__content {
+    padding: 0.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 12rem);
+    overflow-y: scroll;
+
+    & > *:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__card {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+    flex: 0 0 100%;
+  }
+}
+
+.card {
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+
+  &__left {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__img {
+    background-size: cover;
+    width: 4rem;
+    height: 4rem;
+    margin-top: 1rem;
+    border-radius: 50%;
+    border: 2px solid var(--ion-color-primary);
+  }
+
+  &__name {
+    color: #999;
+    font-size: small;
+    font-weight: 500;
+    padding: 0.25rem 0 0.75rem;
+    text-align: center;
+  }
+
+  &__location,
+  &__date,
+  &__time {
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      flex: 0 0 10%;
+      margin-right: 1rem;
+    }
+
+    &-text {
+      flex: 0 0 calc(90% - 1rem);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-icon,
+    &-text {
+      color: var(--ion-color-medium);
+    }
+  }
+
+  &__right {
+    flex: 0 0 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__main {
+    flex: 0 0 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    & > *:not(:last-child) {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  &__count {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__going {
+    font-style: italic;
+  }
+
+  &__count,
+  &__going {
+    color: var(--ion-color-medium);
+  }
+}
