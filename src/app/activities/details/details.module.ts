@@ -6,8 +6,13 @@ import { IonicModule } from "@ionic/angular";
 
 import { DetailsPageRoutingModule } from "./details-routing.module";
 
-import { DetailsPage } from "./details.page";
+import { BottomSheetOverviewSheet, DetailsPage } from "./details.page";
 import { AngularMaterialModule } from "src/app/shared/angular-material.module";
+import {
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+  MAT_BOTTOM_SHEET_DATA,
+} from "@angular/material/bottom-sheet";
 
 @NgModule({
   imports: [
@@ -17,7 +22,13 @@ import { AngularMaterialModule } from "src/app/shared/angular-material.module";
     DetailsPageRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
+    MatBottomSheetModule,
   ],
-  declarations: [DetailsPage],
+  declarations: [DetailsPage, BottomSheetOverviewSheet],
+  entryComponents: [BottomSheetOverviewSheet],
+  providers: [
+    { provide: MatBottomSheetRef, useValue: {} },
+    { provide: MAT_BOTTOM_SHEET_DATA, useValue: {} },
+  ],
 })
 export class DetailsPageModule {}

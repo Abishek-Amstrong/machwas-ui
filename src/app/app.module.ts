@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ChatComponent } from "./messaging/chat/chat.component";
 import { AngularMaterialModule } from "./shared/angular-material.module";
 import { SMS } from "@ionic-native/sms/ngx";
+import { ToastrModule } from "ngx-toastr";
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
@@ -35,6 +36,11 @@ export class HammerConfig extends HammerGestureConfig {
     BrowserAnimationsModule,
     AngularMaterialModule,
     HammerModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: false,
+      enableHtml: true,
+    }),
   ],
   providers: [
     StatusBar,

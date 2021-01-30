@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ToastController } from "@ionic/angular";
 
 @Component({
   selector: "app-auth",
@@ -7,7 +8,14 @@ import { Router } from "@angular/router";
   styleUrls: ["./auth.page.scss"],
 })
 export class AuthPage implements OnInit {
-  constructor(private router: Router) {}
+  userName: string;
+
+  constructor(
+    private router: Router,
+    private toastController: ToastController
+  ) {
+    this.userName = "";
+  }
 
   ngOnInit() {}
 
@@ -15,7 +23,17 @@ export class AuthPage implements OnInit {
     this.router.navigate(["/", "home", "activities"]);
   }
 
-  navToRegister() {
-    this.router.navigate(["/", "auth", "register"]);
+  async navToRegister() {
+    if (this.userName) {
+      this.router.navigate(["/", "auth", "register", this.userName]);
+    } else {
+      const toast = await this.toastController.create({
+        position: "top",
+        message: "Please enter name to proceed!",
+        duration: 1000,
+      });
+
+      toast.present();
+    }
   }
 }

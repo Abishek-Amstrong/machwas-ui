@@ -11,10 +11,26 @@
 
     <div class="form__with">With Who?</div>
 
-    <div class="form__group">
-      <ion-item>
-        <ion-input type="text" formControlName="friendsList" placeholder="Tag your friends" required></ion-input>
-      </ion-item>
+    <div class="form__group form__tag-friends">
+      <mat-form-field class="form__field" appearance="outline">
+        <input type="text" placeholder="Tag your friends" matInput [matAutocomplete]="auto"
+          formControlName="friendsList">
+      </mat-form-field>
+
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let user of filteredFriends | async" [value]="selectedFriends">
+          <div (click)="optionClicked($event, user)">
+            <mat-checkbox [checked]="user.selected" (change)="toggleSelection(user)" (click)="$event.stopPropagation()">
+              <span class="form__option">
+                <img class="form__img" aria-hidden [src]="user.imgUrl" height="25">
+                <span>{{user.name}}</span>
+              </span>
+            </mat-checkbox>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+
+      <button mat-flat-button class="form__add" (click)="openBottomSheet()">Add</button>
     </div>
 
     <div class="form__stories">
