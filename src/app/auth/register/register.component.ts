@@ -31,9 +31,9 @@ export class RegisterComponent implements OnInit {
       mobileNo: ["", Validators.required],
       userName: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      userDOB: ["", [Validators.required, Validators.email]],
+      userDOB: ["", [Validators.required]],
       employment: [""],
-      description: ["", [Validators.required, Validators.email]],
+      description: ["", [Validators.required]],
     });
   }
 
@@ -42,9 +42,9 @@ export class RegisterComponent implements OnInit {
       mobileNo: ["", Validators.required],
       userName: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      userDOB: ["", [Validators.required, Validators.email]],
+      userDOB: ["", [Validators.required]],
       employment: [""],
-      description: ["", [Validators.required, Validators.email]],
+      description: ["", [Validators.required]],
     });
 
     this.route.paramMap.subscribe((params) => {
@@ -67,6 +67,14 @@ export class RegisterComponent implements OnInit {
   // To create a new user
   registerUser() {
     this.submitted = true;
+
+    console.log(this.form);
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
     this.accountService.register(this.form.value).subscribe(
       (result) => {
         console.log(result);
