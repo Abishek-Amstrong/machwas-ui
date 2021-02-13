@@ -78,6 +78,8 @@ export class RegisterComponent implements OnInit {
     this.accountService.register(this.form.value).subscribe(
       (result) => {
         console.log(result);
+        this.toasterService.success("Registration is successful");
+        this.router.navigate(["/", "home", "activities"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));
