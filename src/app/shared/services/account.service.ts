@@ -83,6 +83,30 @@ export class AccountService {
     return this.http.post(`${environment.apiUrl}/adduser`, user);
   }
 
+  getEventsList() {
+    return this.http.get(`${environment.apiUrl}/events`);
+  }
+
+  getPendingEventsList(user: string) {
+    return this.http.get(`${environment.apiUrl}/mypendingevents/${user}`);
+  }
+
+  getUsersList(mobile?: any) {
+    return mobile ? this.http.get(`${environment.apiUrl}/user/${mobile}`) : this.http.get(`${environment.apiUrl}/user`);
+  }
+
+  createEvent(params: any) {
+    return this.http.post(`${environment.apiUrl}/createevent`, params);
+  }
+
+  getMyEvents(id: any) {
+    return this.http.get(`${environment.apiUrl}/myevents/${id}`);
+  }
+
+  updateAcceptOrReject(status: any) {
+    return this.http.post(`${environment.apiUrl}/acceptorrejectevent`, status);
+  }
+
   handleError(errorObj: any) {
     if (typeof errorObj.error === "string") {
       this.toasterService.error(errorObj.error);

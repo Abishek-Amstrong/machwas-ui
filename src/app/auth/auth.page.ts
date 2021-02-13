@@ -20,6 +20,7 @@ export class AuthPage implements OnInit {
   ngOnInit() {}
 
   navToActivities() {
+    localStorage.setItem("userMobile", "9500156799");
     this.router.navigate(["/", "home", "activities"]);
   }
 

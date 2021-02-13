@@ -9,9 +9,9 @@
 
   <div class="activity__content">
     <div class="activity__card ion-activatable ripple-parent" *ngFor="let activity of activities;"
-      (click)="displayCardDetails(activity.title)">
+      (click)="displayCardDetails(activity.eventName)">
       <div class="activity__img" [style.background-image]="'url(' + activity.imageUrl + ')'"></div>
-      <span class="activity__text">{{activity.title | uppercase }}</span>
+      <span class="activity__text">{{activity.eventName | uppercase }}</span>
       <ion-ripple-effect></ion-ripple-effect>
     </div>
   </div>

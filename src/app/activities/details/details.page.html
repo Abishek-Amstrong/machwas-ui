@@ -23,7 +23,7 @@
             <mat-checkbox [checked]="user.selected" (change)="toggleSelection(user)" (click)="$event.stopPropagation()">
               <span class="form__option">
                 <img class="form__img" aria-hidden [src]="user.imgUrl" height="25">
-                <span>{{user.name}}</span>
+                <span>{{user.userName}}</span>
               </span>
             </mat-checkbox>
           </div>

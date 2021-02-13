@@ -22,10 +22,9 @@
       </ion-slide>
     </ion-slides>
 
-    <h1 class="slide__name">Abishek Amstrong</h1>
+    <h1 class="slide__name">{{userInfo.userName}}</h1>
     <div class="slide__location">Chennai</div>
-    <div class="slide__about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ratione sit commodi
-      voluptatem.</div>
+    <div class="slide__about">{{userInfo.description}}</div>
 
     <div class="slide__prev ion-activatable ripple-parent" (click)="previousSlide()">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>

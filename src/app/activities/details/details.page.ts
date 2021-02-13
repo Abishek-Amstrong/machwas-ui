@@ -6,7 +6,7 @@ import {
   Inject,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { concat, fromEvent, Observable } from "rxjs";
 import {
   debounceTime,
@@ -20,6 +20,9 @@ import {
   MatBottomSheetRef,
 } from "@angular/material/bottom-sheet";
 import { MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
+import { ToastrService } from "ngx-toastr";
+import { handleError } from "src/app/shared/helpers/error-handler";
+import { AccountService } from "src/app/shared/services/account.service";
 
 export class User {
   constructor(
@@ -40,22 +43,27 @@ export class User {
 export class DetailsPage implements OnInit {
   eventForm: FormGroup;
   submitted: boolean;
-  friends = [
-    new User("assets/images/male.svg", 17, "Akash Solanki"),
-    new User("assets/images/female.svg", 22, "Avinash Dubey"),
-    new User("assets/images/profile.svg", 26, "Nikesh Gupta"),
-    new User("assets/images/male.svg", 19, "Pawan Kalyan"),
-    new User("assets/images/female.svg", 21, "Ram Ganesh"),
-    new User("assets/images/profile.svg", 32, "Rahul Singh"),
+  friends: any = [
+    // new User("assets/images/male.svg", 17, "Akash Solanki"),
+    // new User("assets/images/female.svg", 22, "Avinash Dubey"),
+    // new User("assets/images/profile.svg", 26, "Nikesh Gupta"),
+    // new User("assets/images/male.svg", 19, "Pawan Kalyan"),
+    // new User("assets/images/female.svg", 21, "Ram Ganesh"),
+    // new User("assets/images/profile.svg", 32, "Rahul Singh"),
   ];
   selectedFriends: User[] = new Array<User>();
   filteredFriends: Observable<User[]>;
   lastFilter: string = "";
+  activity: string = "";
+  userInfo: any;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private route: ActivatedRoute,
+    private accountService: AccountService,
+    private toasterService: ToastrService
   ) {
     this.submitted = false;
     this.eventForm = this.formBuilder.group({
@@ -65,13 +73,45 @@ export class DetailsPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.accountService
+      .getUsersList(localStorage.getItem("userMobile"))
+      .subscribe(
+        (result) => {
+          this.userInfo = result;
+        },
+        (err) => {
+          this.toasterService.error(handleError(err));
+        }
+      );
+
+    this.route.params.subscribe((params) => {
+      this.activity = params["title"];
+    });
+  }
 
   ionViewWillEnter() {
-    this.filteredFriends = this.eventForm.get("friendsList").valueChanges.pipe(
-      startWith<string | User[]>(""),
-      map((value) => (typeof value === "string" ? value : this.lastFilter)),
-      map((filter) => this._filter(filter))
+    this.accountService.getUsersList().subscribe(
+      (result: any[]) => {
+        const setSelectedAsFalse = result.map((e: any) => ({
+          ...e,
+          age: 26,
+          imgUrl: "assets/images/profile.svg",
+        }));
+        this.friends = setSelectedAsFalse;
+        this.filteredFriends = this.eventForm
+          .get("friendsList")
+          .valueChanges.pipe(
+            startWith<string | User[]>(""),
+            map((value) =>
+              typeof value === "string" ? value : this.lastFilter
+            ),
+            map((filter) => this._filter(filter))
+          );
+      },
+      (err) => {
+        this.toasterService.error(handleError(err));
+      }
     );
   }
 
@@ -84,7 +124,12 @@ export class DetailsPage implements OnInit {
           console.log(result);
           if (result) {
             this.friends.push(
-              new User("assets/images/male.svg", result.age, result.name, true)
+              new User(
+                "assets/images/male.svg",
+                result.age,
+                result.userName,
+                true
+              )
             );
             this.selectedFriends.push(this.friends[this.friends.length - 1]);
             this.eventForm.get("friendsList").setValue(this.selectedFriends);
@@ -98,21 +143,21 @@ export class DetailsPage implements OnInit {
     this.lastFilter = filter;
     if (filter) {
       return this.friends.filter((option) => {
-        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+        return option.userName.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
       });
     } else {
       return this.friends.slice();
     }
   }
 
-  displayFn(value: User[] | string): string | undefined {
+  displayFn(value: any[] | string): string | undefined {
     let displayValue: string;
     if (Array.isArray(value)) {
       value.forEach((user, index) => {
         if (index === 0) {
-          displayValue = user.name;
+          displayValue = user.userName;
         } else {
-          displayValue += ", " + user.name;
+          displayValue += ", " + user.userName;
         }
       });
     } else {
@@ -126,13 +171,13 @@ export class DetailsPage implements OnInit {
     this.toggleSelection(user);
   }
 
-  toggleSelection(user: User) {
+  toggleSelection(user: any) {
     user.selected = !user.selected;
     if (user.selected) {
       this.selectedFriends.push(user);
     } else {
       const i = this.selectedFriends.findIndex(
-        (value) => value.name === user.name
+        (value: any) => value.userName === user.userName
       );
       this.selectedFriends.splice(i, 1);
     }
@@ -141,6 +186,22 @@ export class DetailsPage implements OnInit {
   }
 
   navToEvents() {
+    const { friendsList, eventTime, location } = this.eventForm.getRawValue();
+    const params = {
+      eventDateTime: eventTime,
+      eventWith: friendsList,
+      eventLocation: location,
+      eventName: this.activity,
+      userId: this.userInfo._id,
+    };
+    this.accountService.createEvent(params).subscribe(
+      (result) => {
+        // this.activities = result;
+      },
+      (err) => {
+        this.toasterService.error(handleError(err));
+      }
+    );
     this.router.navigate(["/", "home", "events"]);
   }
 }
