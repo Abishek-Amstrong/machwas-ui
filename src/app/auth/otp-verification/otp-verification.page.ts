@@ -52,16 +52,15 @@ export class OtpVerificationPage implements OnInit {
   registerUser() {
     this.submitted = true;
 
-    console.log(this.form);
-
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
 
-    this.accountService.register(this.form.value).subscribe(
+    this.accountService.verifyOTP(this.form.value.otp).subscribe(
       (result) => {
-        this.router.navigate(["/", "auth", "landing"]);
+        localStorage.setItem("userMobile", this.mobileNumber);
+        this.router.navigate(["/", "home", "activities"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));

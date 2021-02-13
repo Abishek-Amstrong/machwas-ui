@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastController } from "@ionic/angular";
+import { ToastrService } from "ngx-toastr";
+import { handleError } from "../shared/helpers/error-handler";
+import { AccountService } from "../shared/services/account.service";
 
 @Component({
   selector: "app-auth",
@@ -12,7 +15,9 @@ export class AuthPage implements OnInit {
 
   constructor(
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private accountService: AccountService,
+    private toasterService: ToastrService
   ) {
     this.userName = "";
   }
@@ -24,8 +29,21 @@ export class AuthPage implements OnInit {
     this.router.navigate(["/", "home", "activities"]);
   }
 
+  // To login with mobile
   loginWithPhone() {
     this.router.navigate(["/", "auth", "login"]);
+  }
+
+  // To login with Insta
+  loginWithInsta() {
+    this.accountService.loginWithInsta().subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (err) => {
+        this.toasterService.error(handleError(err));
+      }
+    );
   }
 
   async navToRegister() {

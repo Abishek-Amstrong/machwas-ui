@@ -49,13 +49,24 @@ export class LoginComponent implements OnInit {
 
   // To create a new user
   registerUser() {
-    console.log(this.form.value);
     this.submitted = true;
-    this.router.navigate([
-      "/",
-      "auth",
-      "otp-verification",
-      this.form.value.mobileNo,
-    ]);
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.accountService.getOTP(this.form.value.mobileNo).subscribe(
+      (result: any) => {
+        sessionStorage.setItem("sessionId", result.Details);
+        this.router.navigate([
+          "/",
+          "auth",
+          "otp-verification",
+          this.form.value.mobileNo,
+        ]);
+      },
+      (err) => {
+        this.toasterService.error(handleError(err));
+      }
+    );
   }
 }

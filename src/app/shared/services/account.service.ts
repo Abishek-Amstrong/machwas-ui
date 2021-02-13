@@ -92,7 +92,9 @@ export class AccountService {
   }
 
   getUsersList(mobile?: any) {
-    return mobile ? this.http.get(`${environment.apiUrl}/user/${mobile}`) : this.http.get(`${environment.apiUrl}/user`);
+    return mobile
+      ? this.http.get(`${environment.apiUrl}/user/${mobile}`)
+      : this.http.get(`${environment.apiUrl}/user`);
   }
 
   createEvent(params: any) {
@@ -105,6 +107,22 @@ export class AccountService {
 
   updateAcceptOrReject(status: any) {
     return this.http.post(`${environment.apiUrl}/acceptorrejectevent`, status);
+  }
+
+  // To get OTP
+  getOTP(mobile: any) {
+    return this.http.get(`${environment.apiUrl}/login/+91${mobile}`);
+  }
+
+  // To verify OTP
+  verifyOTP(otp: any) {
+    const session = sessionStorage.getItem("sessionId");
+    return this.http.get(`${environment.apiUrl}/login/${session}/${otp}`);
+  }
+
+  // To login with Insta
+  loginWithInsta() {
+    return this.http.get(`${environment.apiUrl}/loginwithinsta`);
   }
 
   handleError(errorObj: any) {
