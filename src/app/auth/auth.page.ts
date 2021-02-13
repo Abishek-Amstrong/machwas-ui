@@ -24,6 +24,10 @@ export class AuthPage implements OnInit {
     this.router.navigate(["/", "home", "activities"]);
   }
 
+  loginWithPhone() {
+    this.router.navigate(["/", "auth", "login"]);
+  }
+
   async navToRegister() {
     if (this.userName) {
       this.router.navigate(["/", "auth", "register", this.userName]);

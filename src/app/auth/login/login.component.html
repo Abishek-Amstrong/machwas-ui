@@ -1,13 +1,30 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Welcome</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="register wave">
+  <div class="wave__bg">
+    &nbsp;
+  </div>
+  <div class="wave__wrap">
+    <img src="./../../assets/images/wave.svg" alt="Wave" class="wave__svg">
+  </div>
 
-  <div id="container">
-    <strong class="capitalize">Welcome</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
-        Components</a></p>
+  <div class="register__logo app-logo">machWas</div>
+
+  <div class="register__welcome">
+    Hello! You are...
+  </div>
+
+  <div class="register__body">
+    <form class="register__form form" [formGroup]="form">
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="number" placeholder="Mobile No" required formControlName="mobileNo"></ion-input>
+        </ion-item>
+        <span *ngIf="submitted && f.mobileNo.errors && f.mobileNo.errors.required">Mobile Number is required</span>
+      </div>
+
+      <div class="form__group form__group--last ion-activatable ripple-parent">
+        <a href="javascript:void(0)" class="form__group--continue" (click)="registerUser()">Continue &rarr;</a>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </form>
   </div>
 </ion-content>

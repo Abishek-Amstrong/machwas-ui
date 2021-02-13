@@ -1,28 +1,42 @@
-.register {
-  &__body {
-    padding: 1rem;
-
-    & > * {
-      margin-bottom: 2rem;
-    }
-  }
+.otp {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 
   &__logo {
     color: white;
     font-family: "chewyregular";
     font-size: 3rem;
     text-align: center;
-    margin: 20% 0;
+    min-height: 20vh;
+    max-height: 20vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  &__welcome {
-    text-align: center;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
+  &__top {
+    flex: 50%;
+    min-height: 40vh;
+    max-height: 40vh;
   }
 
+  &__img-container,
+  &__form,
+  &__top,
+  &__bottom {
+    display: flex;
+    align-items: center;
+  }
+
+  &__img-container,
   &__form {
+    justify-content: center;
+  }
+
+  &__bottom {
     & > * {
       display: flex;
       justify-content: center;
@@ -65,6 +79,30 @@
           text-decoration: none;
         }
       }
+    }
+  }
+
+  &__form {
+    flex-direction: column;
+  }
+
+  &__img {
+    height: 70%;
+    width: 70%;
+  }
+
+  &__bottom {
+    flex-direction: column;
+    flex: 50%;
+    min-height: 40vh;
+    max-height: 40vh;
+  }
+
+  &__msg {
+    flex-direction: column;
+
+    & > *:not(:last-child) {
+      margin-bottom: 1rem;
     }
   }
 }

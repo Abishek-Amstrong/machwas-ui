@@ -6,14 +6,14 @@ import { handleError } from "src/app/shared/helpers/error-handler";
 import { AccountService } from "src/app/shared/services/account.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: "app-otp-verification",
+  templateUrl: "./otp-verification.page.html",
+  styleUrls: ["./otp-verification.page.scss"],
 })
-export class LoginComponent implements OnInit {
+export class OtpVerificationPage implements OnInit {
   form: FormGroup;
-  userName: string;
   submitted: boolean;
+  mobileNumber: string;
 
   constructor(
     private router: Router,
@@ -22,20 +22,21 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private toasterService: ToastrService
   ) {
-    this.userName = "";
     this.submitted = false;
+    this.mobileNumber = "";
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      mobileNo: ["", Validators.required],
+      otp: ["", Validators.required],
     });
   }
 
   ionViewWillEnter() {
     this.form = this.fb.group({
-      mobileNo: ["", Validators.required],
+      otp: ["", Validators.required],
     });
+    this.mobileNumber = this.route.snapshot.paramMap.get("id");
   }
 
   // convenience getter for easy access to form fields
@@ -49,13 +50,22 @@ export class LoginComponent implements OnInit {
 
   // To create a new user
   registerUser() {
-    console.log(this.form.value);
     this.submitted = true;
-    this.router.navigate([
-      "/",
-      "auth",
-      "otp-verification",
-      this.form.value.mobileNo,
-    ]);
+
+    console.log(this.form);
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.accountService.register(this.form.value).subscribe(
+      (result) => {
+        this.router.navigate(["/", "auth", "landing"]);
+      },
+      (err) => {
+        this.toasterService.error(handleError(err));
+      }
+    );
   }
 }

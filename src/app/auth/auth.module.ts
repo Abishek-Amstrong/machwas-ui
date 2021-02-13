@@ -9,16 +9,17 @@ import { AuthPageRoutingModule } from "./auth-routing.module";
 import { AuthPage } from "./auth.page";
 import { AngularMaterialModule } from "../shared/angular-material.module";
 import { RegisterComponent } from "./register/register.component";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     AuthPageRoutingModule,
     AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AuthPage, RegisterComponent],
+  declarations: [AuthPage, RegisterComponent, LoginComponent],
 })
 export class AuthPageModule {}

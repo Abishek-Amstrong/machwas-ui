@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="otp">
+  <div class="otp__logo app-logo">machWas</div>
+
+  <div class="otp__top">
+    <div class="otp__img-container">
+      <img src="assets/images/otp.svg" alt="" class="otp__img">
+    </div>
+  </div>
+  <div class="otp__bottom">
+    <div class="otp__msg">
+      <h2 class="otp__msg--header">OTP Verification</h2>
+      <div class="otp__msg--text">Please enter the OTP sent to</div>
+      <div class="otp__msg--phone">+91-{{mobileNumber}}</div>
+    </div>
+    <form class="otp__form form" [formGroup]="form">
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="number" placeholder="Enter OTP" required formControlName="otp"></ion-input>
+        </ion-item>
+        <span *ngIf="submitted && f.otp.errors && f.otp.errors.required">Please enter OTP</span>
+      </div>
+
+      <div class="form__group form__group--last ion-activatable ripple-parent">
+        <a href="javascript:void(0)" class="form__group--continue" (click)="registerUser()">Continue &rarr;</a>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </form>
+  </div>
+</ion-content>
