@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { ToastController } from "@ionic/angular";
+import { IonNav, NavController, ToastController } from "@ionic/angular";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "../shared/helpers/error-handler";
 import { AccountService } from "../shared/services/account.service";
@@ -12,14 +13,17 @@ import { AccountService } from "../shared/services/account.service";
 })
 export class AuthPage implements OnInit {
   userName: string;
+  frameSrc: any;
 
   constructor(
     private router: Router,
     private toastController: ToastController,
     private accountService: AccountService,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
+    private sanitizer: DomSanitizer
   ) {
     this.userName = "";
+    this.frameSrc = "";
   }
 
   ngOnInit() {}
@@ -36,9 +40,20 @@ export class AuthPage implements OnInit {
 
   // To login with Insta
   loginWithInsta() {
+    console.log("testing");
     this.accountService.loginWithInsta().subscribe(
-      (result) => {
+      (result: any) => {
         console.log(result);
+        const replacedHref = result.replaceAll(
+          'href="/',
+          'href="https://www.instagram.com/'
+        );
+        const replacedSrc = replacedHref.replaceAll(
+          'src="/',
+          'href="https://www.instagram.com/'
+        );
+        console.log(replacedSrc);
+        this.frameSrc = this.sanitizer.bypassSecurityTrustHtml(replacedSrc);
       },
       (err) => {
         this.toasterService.error(handleError(err));

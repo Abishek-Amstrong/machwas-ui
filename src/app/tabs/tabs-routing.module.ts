@@ -45,7 +45,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: "event/:title",
+        path: "event/:title/:imgUrl",
         loadChildren: () =>
           import("../activities/details/details.module").then(
             (m) => m.DetailsPageModule

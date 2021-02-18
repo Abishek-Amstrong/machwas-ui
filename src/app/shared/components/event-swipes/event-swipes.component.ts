@@ -13,7 +13,7 @@ import { IonSlides } from "@ionic/angular";
 import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
-import { filter } from 'minimatch';
+import { filter } from "minimatch";
 
 @Component({
   selector: "swipe-ui",
@@ -47,7 +47,11 @@ export class TinderUIComponent {
   previousCard: any;
   isLater: boolean;
 
-  constructor(private renderer: Renderer2, private accountService: AccountService, private toasterService: ToastrService) {
+  constructor(
+    private renderer: Renderer2,
+    private accountService: AccountService,
+    private toasterService: ToastrService
+  ) {
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,
@@ -239,18 +243,22 @@ export class TinderUIComponent {
     }
 
     const status = this.currentAction === "right" ? "accepted" : "rejected";
-    const request = {
-      eventStatus: status,
-      id: this.previousCard._id
-    }; console.log(request)
-    this.accountService.updateAcceptOrReject(request).subscribe(
-      (result) => {
-        // this.activities = result;
-      },
-      (err) => {
-        this.toasterService.error(handleError(err));
-      }
-    );
+    console.log(this.previousCard);
+    if (this.previousCard) {
+      const request = {
+        eventStatus: status,
+        id: this.previousCard._id,
+      };
+      console.log(request);
+      this.accountService.updateAcceptOrReject(request).subscribe(
+        (result) => {
+          // this.activities = result;
+        },
+        (err) => {
+          this.toasterService.error(handleError(err));
+        }
+      );
+    }
   }
 
   emitChoice(heart, card) {

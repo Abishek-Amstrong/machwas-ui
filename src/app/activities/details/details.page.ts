@@ -56,6 +56,7 @@ export class DetailsPage implements OnInit {
   lastFilter: string = "";
   activity: string = "";
   userInfo: any;
+  imgUrl: string;
 
   constructor(
     private router: Router,
@@ -66,6 +67,7 @@ export class DetailsPage implements OnInit {
     private toasterService: ToastrService
   ) {
     this.submitted = false;
+    this.imgUrl = "";
     this.eventForm = this.formBuilder.group({
       eventTime: ["", [Validators.required]],
       friendsList: ["", [Validators.required]],
@@ -73,7 +75,9 @@ export class DetailsPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.accountService
       .getUsersList(localStorage.getItem("userMobile"))
       .subscribe(
@@ -87,10 +91,9 @@ export class DetailsPage implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.activity = params["title"];
+      this.imgUrl = params["imgUrl"];
     });
-  }
 
-  ionViewWillEnter() {
     this.accountService.getUsersList().subscribe(
       (result: any[]) => {
         const setSelectedAsFalse = result.map((e: any) => ({
@@ -193,6 +196,7 @@ export class DetailsPage implements OnInit {
       eventLocation: location,
       eventName: this.activity,
       userId: this.userInfo._id,
+      imgUrl: this.imgUrl,
     };
     this.accountService.createEvent(params).subscribe(
       (result) => {

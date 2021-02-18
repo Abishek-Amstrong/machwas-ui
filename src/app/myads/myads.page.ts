@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 @Component({
   selector: "app-myads",
@@ -12,7 +12,10 @@ import * as moment from 'moment';
 export class MyadsPage implements OnInit {
   events: any;
 
-  constructor(private accountService: AccountService, private toasterService: ToastrService) {
+  constructor(
+    private accountService: AccountService,
+    private toasterService: ToastrService
+  ) {
     // this.events = [
     //   {
     //     imgUrl: "assets/images/male-white.svg",
@@ -50,7 +53,9 @@ export class MyadsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.accountService.getUsersList(localStorage.getItem("userMobile")).subscribe(
+    const userId = localStorage.getItem("userMobile");
+    console.log(userId);
+    this.accountService.getUsersList(userId).subscribe(
       (result: any) => {
         this.accountService.getMyEvents(result._id).subscribe(
           (events: any[]) => {
@@ -59,12 +64,12 @@ export class MyadsPage implements OnInit {
                 ...event,
                 imgUrl: "assets/images/profile.svg",
                 location: event.eventLocation,
-                eventDate: moment(event.eventDateTime).format('ddd Do MMM'),
-                time: moment(event.eventDateTime).format('LT'),
+                eventDate: moment(event.eventDateTime).format("ddd Do MMM"),
+                time: moment(event.eventDateTime).format("LT"),
                 hostName: result.userName,
-                going: event.eventWith.length
-              }
-            })
+                going: event.eventWith.length,
+              };
+            });
           },
           (err) => {
             this.toasterService.error(handleError(err));

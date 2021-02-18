@@ -12,7 +12,11 @@ import { handleError } from "src/app/shared/helpers/error-handler";
 export class ActivitiesPage implements OnInit {
   activities: any;
 
-  constructor(private router: Router, private accountService: AccountService, private toasterService: ToastrService) {
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private toasterService: ToastrService
+  ) {
     // this.activities = [
     //   { imageUrl: "assets/images/go-out.jpg", title: "Go Out" },
     //   { imageUrl: "assets/images/travel.jpg", title: "Travel" },
@@ -38,7 +42,7 @@ export class ActivitiesPage implements OnInit {
     );
   }
 
-  displayCardDetails(activity: string) {
-    this.router.navigate(["/", "home", "event", activity]);
+  displayCardDetails(activity: string, imgUrl: string) {
+    this.router.navigate(["/", "home", "event", activity, imgUrl]);
   }
 }

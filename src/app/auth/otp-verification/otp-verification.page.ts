@@ -57,14 +57,17 @@ export class OtpVerificationPage implements OnInit {
       return;
     }
 
-    this.accountService.verifyOTP(this.form.value.otp).subscribe(
-      (result) => {
-        localStorage.setItem("userMobile", this.mobileNumber);
-        this.router.navigate(["/", "home", "activities"]);
-      },
-      (err) => {
-        this.toasterService.error(handleError(err));
-      }
-    );
+    this.accountService
+      .verifyOTP(this.mobileNumber, this.form.value.otp)
+      .subscribe(
+        (result: any) => {
+          console.log(result);
+          localStorage.setItem("userMobile", result._id);
+          this.router.navigate(["/", "home", "activities"]);
+        },
+        (err) => {
+          this.toasterService.error(handleError(err));
+        }
+      );
   }
 }

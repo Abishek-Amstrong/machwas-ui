@@ -115,14 +115,26 @@ export class AccountService {
   }
 
   // To verify OTP
-  verifyOTP(otp: any) {
+  verifyOTP(mobileNumber: any, otp: any) {
     const session = sessionStorage.getItem("sessionId");
-    return this.http.get(`${environment.apiUrl}/login/${session}/${otp}`);
+    return this.http.get(
+      `${environment.apiUrl}/login/${mobileNumber}/${session}/${otp}`
+    );
   }
 
   // To login with Insta
   loginWithInsta() {
-    return this.http.get(`${environment.apiUrl}/loginwithinsta`);
+    return this.http.get(`https://machwasapp.herokuapp.com/loginwithinsta`, {
+      responseType: "text",
+    });
+  }
+
+  // To update profile
+  updateProfile(payload: any) {
+    payload["id"] = localStorage.getItem("userMobile")
+      ? Number(localStorage.getItem("userMobile"))
+      : "";
+    return this.http.post(`${environment.apiUrl}/updateprofile`, payload);
   }
 
   handleError(errorObj: any) {

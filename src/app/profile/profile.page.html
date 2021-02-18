@@ -1,7 +1,23 @@
 <ion-content class="profile">
-  <ion-button class="profile__settings" fill="clear">
+  <ion-button class="profile__settings" fill="clear" [matMenuTriggerFor]="menu">
     <ion-icon slot="icon-only" name="settings" color="light"></ion-icon>
   </ion-button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="navToProfileUpdate()">
+      <mat-icon class="menu-icon">edit</mat-icon>
+      <span>Edit</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon class="menu-icon">phone</mat-icon>
+      <span>Phone Number</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon class="menu-icon">logout</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-menu>
 
   <div class="profile__logo app-logo">
     machWas
@@ -10,20 +26,23 @@
   <div class="profile__slider">
     <ion-slides pager="false" [options]="slideOpts" #slider>
       <ion-slide class="slide">
-        <img src="./../../assets/images/male-white.svg" alt="Profile" class="profile__img slide__img">
+        <!-- <img src="./../../assets/images/male-white.svg" alt="Profile" class="profile__img slide__img"> -->
+        <img [src]="imgUrl" alt="Profile" class="profile__img slide__img">
       </ion-slide>
 
       <ion-slide class="slide">
-        <img src="./../../assets/images/profile.svg" alt="Profile" class="profile__img slide__img">
+        <!-- <img src="./../../assets/images/profile.svg" alt="Profile" class="profile__img slide__img"> -->
+        <img [src]="imgUrl" alt="Profile" class="profile__img slide__img">
       </ion-slide>
 
       <ion-slide class="slide">
-        <img src="./../../assets/images/female-white.svg" alt="Profile" class="profile__img slide__img">
+        <!-- <img src="./../../assets/images/female-white.svg" alt="Profile" class="profile__img slide__img"> -->
+        <img [src]="imgUrl" alt="Profile" class="profile__img slide__img">
       </ion-slide>
     </ion-slides>
 
-    <h1 class="slide__name">{{userInfo.userName}}</h1>
-    <div class="slide__location">Chennai</div>
+    <h1 class="slide__name">{{userInfo.userName | titlecase}}</h1>
+    <div class="slide__location">{{userInfo.employment | titlecase}}</div>
     <div class="slide__about">{{userInfo.description}}</div>
 
     <div class="slide__prev ion-activatable ripple-parent" (click)="previousSlide()">

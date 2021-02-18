@@ -4,20 +4,18 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { IonicModule } from "@ionic/angular";
 
-import { ProfilePageRoutingModule } from "./profile-routing.module";
+import { UpdatePageRoutingModule } from "./update-routing.module";
 
-import { ProfilePage } from "./profile.page";
-import { AngularMaterialModule } from "../shared/angular-material.module";
+import { UpdatePage } from "./update.page";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProfilePageRoutingModule,
-    AngularMaterialModule,
+    UpdatePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [ProfilePage],
+  declarations: [UpdatePage],
 })
-export class ProfilePageModule {}
+export class UpdatePageModule {}

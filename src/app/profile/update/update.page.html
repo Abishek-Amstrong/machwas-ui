@@ -1,0 +1,64 @@
+<ion-content [fullscreen]="true" class="register wave">
+  <div class="wave__bg">
+    &nbsp;
+  </div>
+  <div class="wave__wrap">
+    <img src="./../../assets/images/wave.svg" alt="Wave" class="wave__svg">
+  </div>
+
+  <div class="register__body">
+    <div class="register__header">Hi, {{userName | titlecase}}</div>
+    <div class="register__avatar">
+      <img [src]="imageUrl" alt="Avatar" class="register__avatar--img">
+      <div class="upload-button">
+        <span><i class="material-icons">camera_alt</i></span>
+        <input class="file-input" type="file" id="fileUpload" accept="image/*" #imageInput
+          (change)="uploadFile(imageInput)">
+      </div>
+    </div>
+
+    <form class="register__form form" [formGroup]="form">
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="number" placeholder="Mobile No" required formControlName="mobileNo"></ion-input>
+        </ion-item>
+        <span *ngIf="submitted && f.mobileNo.errors && f.mobileNo.errors.required">Mobile Number is required</span>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="Email" required formControlName="email"></ion-input>
+        </ion-item>
+        <span *ngIf="submitted && f.email.errors && f.email.errors.required">Email is required</span>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="D.O.B" required formControlName="userDOB"></ion-input>
+        </ion-item>
+        <span *ngIf="submitted && f.userDOB.errors && f.userDOB.errors.required">Date Of Birth is required</span>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-input type="text" placeholder="Employment" formControlName="employment"></ion-input>
+        </ion-item>
+        <span>(Optional)</span>
+      </div>
+
+      <div class="form__group">
+        <ion-item>
+          <ion-textarea rows="3" placeholder="Description" required formControlName="description"></ion-textarea>
+        </ion-item>
+        <span *ngIf="!submitted">(Max 30 chars)</span>
+        <span *ngIf="submitted && f.description.errors && f.description.errors.required">Description is
+          required</span>
+      </div>
+
+      <div class="form__group form__group--last ion-activatable ripple-parent">
+        <a href="javascript:void(0)" class="form__group--continue" (click)="registerUser()">Continue &rarr;</a>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
+    </form>
+  </div>
+</ion-content>
