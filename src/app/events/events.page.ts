@@ -35,7 +35,7 @@ export class EventsPage implements OnInit {
             return {
               ...event,
               eventID: event._id,
-              img: event.imgUrl,
+              img: event.imgUrl ? event.imgUrl : "assets/images/BBQ.jpg",
               eventTitle:
                 event.eventName +
                 " " +

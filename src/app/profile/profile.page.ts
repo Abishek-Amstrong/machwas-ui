@@ -35,12 +35,13 @@ export class ProfilePage implements OnInit {
       .getUsersList(localStorage.getItem("userMobile"))
       .subscribe(
         (result: any) => {
-          console.log(result);
-          this.imgUrl =
-            "profilePic" in result
-              ? result.profilePic
-              : "assets/images/male-white.svg";
-          this.userInfo = result;
+          if (result) {
+            this.imgUrl =
+              "profilePic" in result
+                ? result.profilePic
+                : "assets/images/male-white.svg";
+            this.userInfo = result;
+          }
         },
         (err) => {
           this.toasterService.error(handleError(err));

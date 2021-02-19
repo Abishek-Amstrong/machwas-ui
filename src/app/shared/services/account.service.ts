@@ -137,6 +137,14 @@ export class AccountService {
     return this.http.post(`${environment.apiUrl}/updateprofile`, payload);
   }
 
+  // Google fb login
+  thirdPartyLogin(payload: any) {
+    return this.http.post(
+      `https://machwasapp.herokuapp.com/sociallogin`,
+      payload
+    );
+  }
+
   handleError(errorObj: any) {
     if (typeof errorObj.error === "string") {
       this.toasterService.error(errorObj.error);

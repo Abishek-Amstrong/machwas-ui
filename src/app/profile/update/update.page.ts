@@ -110,7 +110,7 @@ export class UpdatePage implements OnInit {
     this.accountService.updateProfile(this.form.value).subscribe(
       (result) => {
         this.form.reset();
-        this.router.navigate(["/", "profile"]);
+        this.router.navigate(["/", "home", "profile"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));

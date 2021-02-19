@@ -78,6 +78,7 @@ export class DetailsPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
+    // To get the user data
     this.accountService
       .getUsersList(localStorage.getItem("userMobile"))
       .subscribe(
@@ -94,6 +95,7 @@ export class DetailsPage implements OnInit {
       this.imgUrl = params["imgUrl"];
     });
 
+    // To get the list of friends
     this.accountService.getUsersList().subscribe(
       (result: any[]) => {
         const setSelectedAsFalse = result.map((e: any) => ({

@@ -24,6 +24,7 @@
     "@angular/router": "~10.0.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@capacitor-community/contacts": "0.0.3",
+    "@capacitor-community/facebook-login": "^1.1.0",
     "@capacitor/android": "^2.4.4",
     "@capacitor/core": "2.4.4",
     "@ionic-native/contacts": "^5.30.0",
