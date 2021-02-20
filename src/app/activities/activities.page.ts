@@ -19,6 +19,8 @@ export class ActivitiesPage implements OnInit {
   uid: string;
   userName: string;
   appid: string;
+  searchText: string;
+  originalActivities: any;
 
   constructor(
     private router: Router,
@@ -31,21 +33,23 @@ export class ActivitiesPage implements OnInit {
     this.uid = localStorage.getItem("userMobile");
     this.userName = localStorage.getItem("userName");
     this.appid = "29851b1adf4c854";
+    this.searchText = "";
+    this.originalActivities = [];
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    // this.chatLogin();
     this.accountService.getEventsList().subscribe(
-      (result) => {
+      (result: any) => {
         this.activities = result;
+        this.originalActivities = result;
       },
       (err) => {
         this.toasterService.error(handleError(err));
       }
     );
-  }
-
-  ionViewWillEnter() {
-    // this.chatLogin();
   }
 
   // To login user to his chatroom
@@ -112,5 +116,13 @@ export class ActivitiesPage implements OnInit {
 
   displayCardDetails(activity: string, imgUrl: string) {
     this.router.navigate(["/", "home", "event", activity, imgUrl]);
+  }
+
+  // To filter the activities based on entered text
+  setFilteredItems(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.activities = this.originalActivities.filter((event) =>
+      event.eventName.toLowerCase().includes(query.toLowerCase())
+    );
   }
 }

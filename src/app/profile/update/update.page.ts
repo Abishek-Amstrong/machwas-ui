@@ -100,13 +100,11 @@ export class UpdatePage implements OnInit {
   registerUser() {
     this.submitted = true;
 
-    console.log(this.form);
-
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
+
     this.accountService.updateProfile(this.form.value).subscribe(
       (result) => {
         this.form.reset();

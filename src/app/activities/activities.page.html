@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content class="activity__body">
-  <ion-searchbar class="activity__search"></ion-searchbar>
+  <ion-searchbar class="activity__search" [(ngModel)]="searchText" (ionInput)="setFilteredItems($event)" debounce="500">
+  </ion-searchbar>
 
   <div class="activity__content">
     <div class="activity__card ion-activatable ripple-parent" *ngFor="let activity of activities;"

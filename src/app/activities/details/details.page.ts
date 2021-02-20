@@ -57,6 +57,7 @@ export class DetailsPage implements OnInit {
   activity: string = "";
   userInfo: any;
   imgUrl: string;
+  userId: string;
 
   constructor(
     private router: Router,
@@ -68,6 +69,7 @@ export class DetailsPage implements OnInit {
   ) {
     this.submitted = false;
     this.imgUrl = "";
+    this.userId = localStorage.getItem("userMobile");
     this.eventForm = this.formBuilder.group({
       eventTime: ["", [Validators.required]],
       friendsList: ["", [Validators.required]],
@@ -101,9 +103,11 @@ export class DetailsPage implements OnInit {
         const setSelectedAsFalse = result.map((e: any) => ({
           ...e,
           age: 26,
-          imgUrl: "assets/images/profile.svg",
+          imgUrl: e.profilePic ? e.profilePic : "assets/images/profile.svg",
         }));
-        this.friends = setSelectedAsFalse;
+        this.friends = setSelectedAsFalse.filter(
+          (friend) => friend._id != this.userId
+        );
         this.filteredFriends = this.eventForm
           .get("friendsList")
           .valueChanges.pipe(
@@ -120,13 +124,13 @@ export class DetailsPage implements OnInit {
     );
   }
 
+  // To open bottom sheet
   openBottomSheet(): void {
     this.bottomSheet
       .open(BottomSheetOverviewSheet)
       .afterDismissed()
       .subscribe(
         (result) => {
-          console.log(result);
           if (result) {
             this.friends.push(
               new User(
@@ -155,6 +159,7 @@ export class DetailsPage implements OnInit {
     }
   }
 
+  // Display function to format the user list
   displayFn(value: any[] | string): string | undefined {
     let displayValue: string;
     if (Array.isArray(value)) {
@@ -176,6 +181,7 @@ export class DetailsPage implements OnInit {
     this.toggleSelection(user);
   }
 
+  // Update user selection upon selecting the user from drop down
   toggleSelection(user: any) {
     user.selected = !user.selected;
     if (user.selected) {
@@ -190,6 +196,12 @@ export class DetailsPage implements OnInit {
     this.eventForm.get("friendsList").setValue(this.selectedFriends);
   }
 
+  // To navigate to pending events page
+  displayPendingEvents() {
+    this.router.navigate(["/", "home", "events"]);
+  }
+
+  // To navigate to events page upon successful event creation
   navToEvents() {
     const { friendsList, eventTime, location } = this.eventForm.getRawValue();
     const params = {
@@ -273,6 +285,7 @@ export class BottomSheetOverviewSheet {
     });
   }
 
+  // To close the bottom sheet
   closeSheet(event: any): void {
     if (this.friendForm.invalid) {
       return;
