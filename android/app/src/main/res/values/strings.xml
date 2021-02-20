@@ -4,6 +4,6 @@
     <string name="title_activity_main">machWas</string>
     <string name="package_name">com.booking.machWas</string>
     <string name="custom_url_scheme">com.booking.machWas</string>
-    <string name="facebook_app_id">1227885097608283</string>
-    <string name="fb_login_protocol_scheme">fb1227885097608283</string>
+    <string name="facebook_app_id">433458011334672</string>
+    <string name="fb_login_protocol_scheme">fb433458011334672</string>
 </resources>

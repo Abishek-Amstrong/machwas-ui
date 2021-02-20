@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { IonNav, NavController, ToastController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "../shared/helpers/error-handler";
 import { AccountService } from "../shared/services/account.service";
@@ -111,7 +111,9 @@ export class AuthPage implements OnInit {
       };
       this.accountService.thirdPartyLogin(payload).subscribe(
         (result: any) => {
+          console.log(result);
           localStorage.setItem("userMobile", result._id);
+          localStorage.setItem("userName", result.userName);
           this.router.navigate(["/", "home", "activities"]);
         },
         (err) => {
@@ -152,6 +154,7 @@ export class AuthPage implements OnInit {
   async navToRegister() {
     if (this.userName) {
       this.router.navigate(["/", "auth", "register", this.userName]);
+      this.userName = "";
     } else {
       const toast = await this.toastController.create({
         position: "top",

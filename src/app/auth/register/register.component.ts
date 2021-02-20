@@ -68,16 +68,16 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     this.submitted = true;
 
-    console.log(this.form);
-
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
 
     this.accountService.register(this.form.value).subscribe(
-      (result) => {
-        this.router.navigate(["/", "auth", "landing"]);
+      (result: any) => {
+        localStorage.setItem("userMobile", result._id);
+        localStorage.setItem("userName", result.userName);
+        this.router.navigate(["/", "home", "activities"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));

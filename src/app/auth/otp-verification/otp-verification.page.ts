@@ -61,8 +61,8 @@ export class OtpVerificationPage implements OnInit {
       .verifyOTP(this.mobileNumber, this.form.value.otp)
       .subscribe(
         (result: any) => {
-          console.log(result);
           localStorage.setItem("userMobile", result._id);
+          localStorage.setItem("userName", result.userName);
           this.router.navigate(["/", "home", "activities"]);
         },
         (err) => {

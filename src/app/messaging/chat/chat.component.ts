@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CometChat } from "@cometchat-pro/cordova-ionic-chat";
 
 @Component({
   selector: "app-chat",

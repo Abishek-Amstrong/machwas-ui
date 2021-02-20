@@ -20,6 +20,7 @@ import { SMS } from "@ionic-native/sms/ngx";
 import { ToastrModule } from "ngx-toastr";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HTTP } from "@ionic-native/http/ngx";
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
@@ -56,6 +57,7 @@ export class HammerConfig extends HammerGestureConfig {
       useClass: HammerConfig,
     },
     SMS,
+    HTTP,
   ],
   bootstrap: [AppComponent],
 })
