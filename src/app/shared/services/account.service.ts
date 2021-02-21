@@ -145,6 +145,22 @@ export class AccountService {
     );
   }
 
+  // To get the friends list of the logged in user
+  getFriendList() {
+    const userId = localStorage.getItem("userMobile");
+    return this.http.get(`${environment.apiUrl}/myfriendsList/${userId}`);
+  }
+
+  // To add a friend to the logged in user
+  addFriendToUser(mobileNo: any) {
+    const userId = localStorage.getItem("userMobile");
+    const payload = {
+      mobileNo: mobileNo,
+      userId: userId,
+    };
+    return this.http.post(`${environment.apiUrl}/addfriend`, payload);
+  }
+
   handleError(errorObj: any) {
     if (typeof errorObj.error === "string") {
       this.toasterService.error(errorObj.error);

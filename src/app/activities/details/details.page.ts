@@ -98,7 +98,7 @@ export class DetailsPage implements OnInit {
     });
 
     // To get the list of friends
-    this.accountService.getUsersList().subscribe(
+    this.accountService.getFriendList().subscribe(
       (result: any[]) => {
         const setSelectedAsFalse = result.map((e: any) => ({
           ...e,

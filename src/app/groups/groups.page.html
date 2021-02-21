@@ -20,12 +20,12 @@
   </ion-segment>
 
   <div class="group__cards" *ngIf="selectedSegment === 'Friends'">
-    <div class="group__card card" *ngFor="let c of contacts">
-      <div class="card__avatar">{{c.displayName[0]}}</div>
+    <div class="group__card card" *ngFor="let friend of friends">
+      <img class="card__avatar" [src]="friend.profilePic ? friend.profilePic : 'assets/images/whatsapp.png'">
 
       <div class="card__contact">
-        <div class="card__name">{{c.displayName}}</div>
-        <div class="card__phone">{{c.phoneNumbers[0]}}</div>
+        <div class="card__name">{{friend.userName}}</div>
+        <div class="card__phone">{{friend.mobileNo}}</div>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
       </div>
 
       <div class="card__invite">
-        <ion-button class="card__invite-btn" fill="clear" size="small">
+        <ion-button class="card__invite-btn" fill="clear" size="small" (click)="addFriend(c.phoneNumbers[0])">
           <ion-icon slot="icon-only" name="add" color="tertiary"></ion-icon>
         </ion-button>
       </div>

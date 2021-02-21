@@ -45,9 +45,8 @@ ion-content {
       &__avatar {
         width: 3rem;
         height: 3rem;
+        object-fit: cover;
         margin-right: 1.5rem;
-        background-color: var(--ion-color-primary);
-        color: #fff !important;
         flex: 0 0 auto;
         border-radius: 50%;
         display: flex;
