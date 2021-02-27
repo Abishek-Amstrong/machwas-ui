@@ -13,7 +13,7 @@ import { ToastrService } from "ngx-toastr";
   providedIn: "root",
 })
 export class AccountService {
-  private userSubject: BehaviorSubject<User>;
+  private userSubject: BehaviorSubject<any>;
   public user: Observable<User>;
   decodedToken: any;
   currentUser: string;
@@ -26,8 +26,8 @@ export class AccountService {
     private http: HttpClient,
     private toasterService: ToastrService
   ) {
-    this.userSubject = new BehaviorSubject<User>(
-      this.jwtHelper.decodeToken(localStorage.getItem(this.JWT_TOKEN))
+    this.userSubject = new BehaviorSubject<any>(
+      localStorage.getItem("userMobile")
     );
     this.user = this.userSubject.asObservable();
   }
@@ -42,11 +42,11 @@ export class AccountService {
   }
 
   private storeTokens(tokens: Tokens) {
-    localStorage.setItem(this.JWT_TOKEN, tokens.token);
-    const decodedToken = this.jwtHelper.decodeToken(tokens.token);
-    this.userSubject.next(decodedToken);
-    const userId = decodedToken.nameid;
-    localStorage.setItem("userId", userId);
+    // localStorage.setItem(this.JWT_TOKEN, tokens.token);
+    // const decodedToken = this.jwtHelper.decodeToken(tokens.token);
+    // this.userSubject.next(decodedToken);
+    // const userId = decodedToken.nameid;
+    // localStorage.setItem("userId", userId);
   }
 
   getUserId() {
@@ -64,7 +64,7 @@ export class AccountService {
     this.currentUser = null;
     this.removeTokens();
     this.userSubject.next(null);
-    this.router.navigate(["/shared/login"]);
+    this.router.navigate(["/auth/landing"]);
   }
 
   private removeTokens() {
@@ -111,7 +111,7 @@ export class AccountService {
 
   // To get OTP
   getOTP(mobile: any) {
-    return this.http.get(`${environment.apiUrl}/login/+91${mobile}`);
+    return this.http.get(`${environment.apiUrl}/login/${mobile}`);
   }
 
   // To verify OTP
@@ -120,6 +120,12 @@ export class AccountService {
     return this.http.get(
       `${environment.apiUrl}/login/${mobileNumber}/${session}/${otp}`
     );
+    // .pipe(
+    //   tap((token: any) => {
+    //     // this.userSubject.next()
+    //     console.log(token);
+    //   })
+    // );
   }
 
   // To login with Insta

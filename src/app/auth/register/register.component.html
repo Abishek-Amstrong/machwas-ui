@@ -15,7 +15,8 @@
     <form class="register__form form" [formGroup]="form">
       <div class="form__group">
         <ion-item>
-          <ion-input type="number" placeholder="Mobile No" required formControlName="mobileNo"></ion-input>
+          <ion-input type="text" placeholder="Mobile No With country code" required formControlName="mobileNo">
+          </ion-input>
         </ion-item>
         <span *ngIf="submitted && f.mobileNo.errors && f.mobileNo.errors.required">Mobile Number is required</span>
       </div>
