@@ -14,6 +14,7 @@ import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
 import { filter } from "minimatch";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "swipe-ui",
@@ -50,7 +51,8 @@ export class TinderUIComponent {
   constructor(
     private renderer: Renderer2,
     private accountService: AccountService,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
+    private router: Router
   ) {
     this.slideOpts = {
       initialSlide: 0,
@@ -62,9 +64,6 @@ export class TinderUIComponent {
       { imgUrl: "assets/images/male-white.svg" },
       { imgUrl: "assets/images/profile.svg" },
       { imgUrl: "assets/images/female-white.svg" },
-      // { imgUrl: "assets/images/male-white.svg" },
-      // { imgUrl: "assets/images/profile.svg" },
-      // { imgUrl: "assets/images/female-white.svg" },
     ];
 
     this.currentAction = "";
@@ -101,20 +100,6 @@ export class TinderUIComponent {
     }
     this.shiftRequired = true;
     this.transitionInProgress = true;
-
-    // const status = this.currentAction === "right" ? "accepted" : "rejected";
-    // const request = {
-    //   eventStatus: status,
-    //   id: this.previousCard._id
-    // }
-    // this.accountService.updateAcceptOrReject(request).subscribe(
-    //   (result) => {
-    //     // this.activities = result;
-    //   },
-    //   (err) => {
-    //     this.toasterService.error(handleError(err));
-    //   }
-    // );
   }
 
   handlePan(event) {
@@ -240,31 +225,42 @@ export class TinderUIComponent {
       if (this.isLater && this.cards.length) {
         this.cards.push(this.previousCard);
       }
-    }
 
-    const status = this.currentAction === "right" ? "accepted" : "rejected";
-    console.log(this.previousCard);
-    if (this.previousCard) {
-      if (
-        "userRequest" in this.previousCard &&
-        this.previousCard.userRequest &&
-        this.previousCard.userRequest.length
-      ) {
-        // this.router;
-      } else {
+      const status = this.currentAction === "right" ? "accept" : "reject";
+      console.log(this.previousCard);
+      if (this.previousCard) {
         const request = {
-          eventStatus: status,
-          id: this.previousCard._id,
+          userId: localStorage.getItem("userMobile"),
+          eventAction: status,
+          eventDetails: this.previousCard,
         };
+
         console.log(request);
-        this.accountService.updateAcceptOrReject(request).subscribe(
-          (result) => {
-            // this.activities = result;
-          },
-          (err) => {
-            this.toasterService.error(handleError(err));
-          }
-        );
+
+        if (
+          status === "accept" &&
+          "userRequest" in this.previousCard &&
+          this.previousCard.userRequest &&
+          this.previousCard.userRequest.length
+        ) {
+          this.accountService.updateAcceptOrReject(request).subscribe(
+            (result) => {
+              this.router.navigate(["/", "match"]);
+            },
+            (err) => {
+              this.toasterService.error(handleError(err));
+            }
+          );
+        } else {
+          this.accountService.updateAcceptOrReject(request).subscribe(
+            (result) => {
+              // this.activities = result;
+            },
+            (err) => {
+              this.toasterService.error(handleError(err));
+            }
+          );
+        }
       }
     }
   }

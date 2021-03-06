@@ -27,7 +27,11 @@ export class MyadsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.getAllEvents();
+    if (this.selectedTabIndex === 0) {
+      this.getAllEvents();
+    } else if (this.selectedTabIndex === 1) {
+      this.getPendingEvents();
+    }
   }
 
   ngOnInit() {}
@@ -38,22 +42,28 @@ export class MyadsPage implements OnInit {
       .getPendingEventsList(localStorage.getItem("userMobile"))
       .subscribe(
         (result: any[]) => {
-          const eventsList = result.map((event: any) => {
-            return {
-              ...event,
-              eventID: event._id,
-              img: event.imgUrl ? event.imgUrl : "assets/images/BBQ.jpg",
-              eventTitle:
-                event.eventName +
-                " " +
-                moment(event.eventDateTime).format("ddd hh:mm") +
-                " IST",
-              eventLocation: event.location,
-              description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-              eventDate: moment(event.eventDateTime).format("DD MMM YYYY"),
-            };
-          });
+          const eventsList = result
+            .filter(
+              (eventObj) =>
+                eventObj.createdBy &&
+                eventObj.createdBy != localStorage.getItem("userMobile")
+            )
+            .map((event: any) => {
+              return {
+                ...event,
+                eventID: event._id,
+                img: event.imgUrl ? event.imgUrl : "assets/images/BBQ.jpg",
+                eventTitle:
+                  event.eventName +
+                  " " +
+                  moment(event.eventDateTime).format("ddd hh:mm") +
+                  " IST",
+                eventLocation: event.location,
+                description:
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                eventDate: moment(event.eventDateTime).format("DD MMM YYYY"),
+              };
+            });
           this.cards = eventsList;
         },
         (err) => {
@@ -69,7 +79,7 @@ export class MyadsPage implements OnInit {
     this.accountService.getUsersList(userId).subscribe(
       (result: any) => {
         console.log(result);
-        if (result && result.length) {
+        if (result) {
           this.accountService.getMyEvents(result._id).subscribe(
             (events: any[]) => {
               this.events = events.map((event: any) => {

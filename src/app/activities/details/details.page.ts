@@ -204,13 +204,17 @@ export class DetailsPage implements OnInit {
   // To navigate to events page upon successful event creation
   navToEvents() {
     const { friendsList, eventTime, location } = this.eventForm.getRawValue();
+    console.log(this.eventForm.getRawValue());
+    console.log(friendsList);
     const params = {
       eventDateTime: eventTime,
       eventWith: friendsList,
       eventLocation: location,
       eventName: this.activity,
-      userId: this.userInfo._id,
+      userId: localStorage.getItem("userMobile"),
       imgUrl: this.imgUrl,
+      eventStatus: "open",
+      eventLimit: 3,
     };
     this.accountService.createEvent(params).subscribe(
       (result) => {

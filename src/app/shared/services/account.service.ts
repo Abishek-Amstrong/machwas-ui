@@ -93,8 +93,8 @@ export class AccountService {
 
   getUsersList(mobile?: any) {
     return mobile
-      ? this.http.get(`${environment.apiUrl}/myevents/${mobile}`)
-      : this.http.get(`${environment.apiUrl}/myevents`);
+      ? this.http.get(`${environment.apiUrl}/user/${mobile}`)
+      : this.http.get(`${environment.apiUrl}/user`);
   }
 
   createEvent(params: any) {
