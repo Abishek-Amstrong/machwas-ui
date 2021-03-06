@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { IonSlides } from "@ionic/angular";
 import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
@@ -11,74 +12,99 @@ import * as moment from "moment";
 })
 export class MyadsPage implements OnInit {
   events: any;
+  selectedTabIndex: number;
+  slideOpts: any;
+  @ViewChild("slider") slider: IonSlides;
+  cards;
 
   constructor(
     private accountService: AccountService,
     private toasterService: ToastrService
   ) {
-    // this.events = [
-    //   {
-    //     imgUrl: "assets/images/male-white.svg",
-    //     location: "Soccer, Holiday Inn, Chennai",
-    //     eventDate: "Sat, 6th Jan",
-    //     time: "04:00 PM",
-    //     hostName: "Ganesh",
-    //     going: 3,
-    //   },
-    //   {
-    //     imgUrl: "assets/images/profile.svg",
-    //     location: "Badminton, Radison Blu, Delhi",
-    //     eventDate: "Thu, 17th Dec",
-    //     time: "07:00 PM",
-    //     hostName: "Deepak",
-    //     going: 5,
-    //   },
-    //   {
-    //     imgUrl: "assets/images/female-white.svg",
-    //     location: "Tennis, ITC Grand Chola, Mumbai",
-    //     eventDate: "Wed, 19th Sep",
-    //     time: "05:00 PM",
-    //     hostName: "Nikesh",
-    //     going: 1,
-    //   },
-    //   {
-    //     imgUrl: "assets/images/male-white.svg",
-    //     location: "Cricket, Burj Khalifa, Bihar",
-    //     eventDate: "Sat, 12th Aug",
-    //     time: "02:00 PM",
-    //     hostName: "Akash",
-    //     going: 7,
-    //   },
-    // ];
+    this.selectedTabIndex = 0;
+    this.slideOpts = {};
+    this.cards = [];
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.getAllEvents();
+  }
+
+  ngOnInit() {}
+
+  // To get all the pending events
+  getPendingEvents() {
+    this.accountService
+      .getPendingEventsList(localStorage.getItem("userMobile"))
+      .subscribe(
+        (result: any[]) => {
+          const eventsList = result.map((event: any) => {
+            return {
+              ...event,
+              eventID: event._id,
+              img: event.imgUrl ? event.imgUrl : "assets/images/BBQ.jpg",
+              eventTitle:
+                event.eventName +
+                " " +
+                moment(event.eventDateTime).format("ddd hh:mm") +
+                " IST",
+              eventLocation: event.location,
+              description:
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+              eventDate: moment(event.eventDateTime).format("DD MMM YYYY"),
+            };
+          });
+          this.cards = eventsList;
+        },
+        (err) => {
+          this.toasterService.error(handleError(err));
+        }
+      );
+  }
+
+  // To get the list of all events
+  getAllEvents() {
     const userId = localStorage.getItem("userMobile");
     console.log(userId);
     this.accountService.getUsersList(userId).subscribe(
       (result: any) => {
-        this.accountService.getMyEvents(result._id).subscribe(
-          (events: any[]) => {
-            this.events = events.map((event: any) => {
-              return {
-                ...event,
-                imgUrl: "assets/images/profile.svg",
-                location: event.eventLocation,
-                eventDate: moment(event.eventDateTime).format("ddd Do MMM"),
-                time: moment(event.eventDateTime).format("LT"),
-                hostName: result.userName,
-                going: event.eventWith.length,
-              };
-            });
-          },
-          (err) => {
-            this.toasterService.error(handleError(err));
-          }
-        );
+        console.log(result);
+        if (result && result.length) {
+          this.accountService.getMyEvents(result._id).subscribe(
+            (events: any[]) => {
+              this.events = events.map((event: any) => {
+                return {
+                  ...event,
+                  imgUrl: "assets/images/profile.svg",
+                  location: event.eventLocation,
+                  eventDate: moment(event.eventDateTime).format("ddd Do MMM"),
+                  time: moment(event.eventDateTime).format("LT"),
+                  hostName: result.userName,
+                  going: event.eventWith.length,
+                };
+              });
+            },
+            (err) => {
+              this.toasterService.error(handleError(err));
+            }
+          );
+        }
       },
       (err) => {
         this.toasterService.error(handleError(err));
       }
     );
+  }
+
+  // To handle tab change
+  onTabChanged(event) {
+    console.log(event);
+    this.selectedTabIndex = event.index;
+
+    if (this.selectedTabIndex === 0) {
+      this.getAllEvents();
+    } else if (this.selectedTabIndex === 1) {
+      this.getPendingEvents();
+    }
   }
 }

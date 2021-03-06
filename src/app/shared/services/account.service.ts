@@ -87,14 +87,14 @@ export class AccountService {
     return this.http.get(`${environment.apiUrl}/events`);
   }
 
-  getPendingEventsList(user: string) {
-    return this.http.get(`${environment.apiUrl}/mypendingevents/${user}`);
+  getPendingEventsList(user: any) {
+    return this.http.get(`${environment.apiUrl}/pendingevents/${user}`);
   }
 
   getUsersList(mobile?: any) {
     return mobile
-      ? this.http.get(`${environment.apiUrl}/user/${mobile}`)
-      : this.http.get(`${environment.apiUrl}/user`);
+      ? this.http.get(`${environment.apiUrl}/myevents/${mobile}`)
+      : this.http.get(`${environment.apiUrl}/myevents`);
   }
 
   createEvent(params: any) {
@@ -153,8 +153,8 @@ export class AccountService {
 
   // To get the friends list of the logged in user
   getFriendList() {
-    const userId = localStorage.getItem("userMobile");
-    return this.http.get(`${environment.apiUrl}/myfriendsList/${userId}`);
+    // const userId = localStorage.getItem("userMobile");
+    return this.http.get(`${environment.apiUrl}/user`);
   }
 
   // To add a friend to the logged in user

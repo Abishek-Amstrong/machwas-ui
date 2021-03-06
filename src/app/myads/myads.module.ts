@@ -1,20 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { MyadsPageRoutingModule } from './myads-routing.module';
+import { MyadsPageRoutingModule } from "./myads-routing.module";
 
-import { MyadsPage } from './myads.page';
+import { MyadsPage } from "./myads.page";
+import { AngularMaterialModule } from "../shared/angular-material.module";
+import { TinderUIComponent } from "../shared/components/event-swipes/event-swipes.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MyadsPageRoutingModule
+    MyadsPageRoutingModule,
+    ReactiveFormsModule,
+    AngularMaterialModule,
   ],
-  declarations: [MyadsPage]
+  declarations: [MyadsPage, TinderUIComponent],
 })
 export class MyadsPageModule {}

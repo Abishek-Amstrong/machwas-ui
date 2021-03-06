@@ -245,19 +245,27 @@ export class TinderUIComponent {
     const status = this.currentAction === "right" ? "accepted" : "rejected";
     console.log(this.previousCard);
     if (this.previousCard) {
-      const request = {
-        eventStatus: status,
-        id: this.previousCard._id,
-      };
-      console.log(request);
-      this.accountService.updateAcceptOrReject(request).subscribe(
-        (result) => {
-          // this.activities = result;
-        },
-        (err) => {
-          this.toasterService.error(handleError(err));
-        }
-      );
+      if (
+        "userRequest" in this.previousCard &&
+        this.previousCard.userRequest &&
+        this.previousCard.userRequest.length
+      ) {
+        // this.router;
+      } else {
+        const request = {
+          eventStatus: status,
+          id: this.previousCard._id,
+        };
+        console.log(request);
+        this.accountService.updateAcceptOrReject(request).subscribe(
+          (result) => {
+            // this.activities = result;
+          },
+          (err) => {
+            this.toasterService.error(handleError(err));
+          }
+        );
+      }
     }
   }
 

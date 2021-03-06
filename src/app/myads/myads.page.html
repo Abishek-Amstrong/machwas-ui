@@ -5,40 +5,48 @@
 </ion-header>
 
 <ion-content class="advertisement__body">
-  <ion-searchbar class="advertisement__search"></ion-searchbar>
-
-  <div class="advertisement__content">
-    <div class="advertisement__card card" *ngFor="let event of events;">
-      <div class="card__left">
-        <div class="card__img" [style.background-image]="'url(' + event.imgUrl + ')'">&nbsp;</div>
-        <div class="card__name">{{event.hostName}}</div>
-      </div>
-      <div class="card__main">
-        <div class="card__location">
-          <div class="card__location-icon">
-            <i class="material-icons">location_on</i>
+  <!-- <ion-searchbar class="advertisement__search"></ion-searchbar> -->
+  <mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="onTabChanged($event);">
+    <mat-tab label="All Event">
+      <div class="advertisement__content">
+        <div class="advertisement__card card" *ngFor="let event of events;">
+          <div class="card__left">
+            <div class="card__img" [style.background-image]="'url(' + event.imgUrl + ')'">&nbsp;</div>
+            <div class="card__name">{{event.hostName}}</div>
           </div>
-          <div class="card__location-text">{{event.location}}</div>
-        </div>
+          <div class="card__main">
+            <div class="card__location">
+              <div class="card__location-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+              <div class="card__location-text">{{event.location}}</div>
+            </div>
 
-        <div class="card__date">
-          <div class="card__date-icon">
-            <i class="material-icons">event</i>
-          </div>
-          <div class="card__date-text">{{event.eventDate}}</div>
-        </div>
+            <div class="card__date">
+              <div class="card__date-icon">
+                <i class="material-icons">event</i>
+              </div>
+              <div class="card__date-text">{{event.eventDate}}</div>
+            </div>
 
-        <div class="card__time">
-          <div class="card__time-icon">
-            <i class="material-icons">access_time</i>
+            <div class="card__time">
+              <div class="card__time-icon">
+                <i class="material-icons">access_time</i>
+              </div>
+              <div class="card__time-text">{{event.time}}</div>
+            </div>
           </div>
-          <div class="card__time-text">{{event.time}}</div>
+          <div class="card__right">
+            <div class="card__count">{{event.going}}</div>
+            <div class="card__going">going</div>
+          </div>
         </div>
       </div>
-      <div class="card__right">
-        <div class="card__count">{{event.going}}</div>
-        <div class="card__going">going</div>
+    </mat-tab>
+    <mat-tab label="Pending Event">
+      <div class="events__slider">
+        <swipe-ui [cards]="cards"></swipe-ui>
       </div>
-    </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
 </ion-content>
