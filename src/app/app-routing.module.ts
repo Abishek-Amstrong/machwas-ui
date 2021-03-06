@@ -53,7 +53,13 @@ const routes: Routes = [
       import("./myads/myads.module").then((m) => m.MyadsPageModule),
     canActivate: [AuthGaurdService],
   },
-  { path: "**", redirectTo: '"home/activities', pathMatch: "full" },
+  {
+    path: 'match',
+    loadChildren: () => import('./match/match.module').then( m => m.MatchPageModule),
+    canActivate: [AuthGaurdService],
+  },
+  { path: "**", redirectTo: '"home/activities', pathMatch: "full" }
+
 ];
 
 @NgModule({
