@@ -77,6 +77,7 @@ export class RegisterComponent implements OnInit {
       (result: any) => {
         localStorage.setItem("userMobile", result._id);
         localStorage.setItem("userName", result.userName);
+        this.toasterService.success("Registered Successfully");
         this.router.navigate(["/", "home", "activities"]);
       },
       (err) => {

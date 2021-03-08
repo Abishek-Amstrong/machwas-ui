@@ -63,7 +63,7 @@ export class OtpVerificationPage implements OnInit {
         (result: any) => {
           localStorage.setItem("userMobile", result._id);
           localStorage.setItem("userName", result.userName);
-          this.router.navigate(["/", "home", "activities"]);
+          this.router.navigateByUrl("/home/activities");
         },
         (err) => {
           this.toasterService.error(handleError(err));

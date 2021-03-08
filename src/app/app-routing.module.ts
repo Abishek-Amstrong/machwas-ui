@@ -6,7 +6,7 @@ import { AuthGaurdService } from "./shared/services/auth.gaurd.service";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "home/activities",
+    redirectTo: "home",
     pathMatch: "full",
   },
   {
@@ -54,12 +54,12 @@ const routes: Routes = [
     canActivate: [AuthGaurdService],
   },
   {
-    path: 'match',
-    loadChildren: () => import('./match/match.module').then( m => m.MatchPageModule),
+    path: "match",
+    loadChildren: () =>
+      import("./match/match.module").then((m) => m.MatchPageModule),
     canActivate: [AuthGaurdService],
   },
-  { path: "**", redirectTo: '"home/activities', pathMatch: "full" }
-
+  { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 
 @NgModule({

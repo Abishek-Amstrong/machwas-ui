@@ -45,8 +45,11 @@ export class MyadsPage implements OnInit {
           const eventsList = result
             .filter(
               (eventObj) =>
-                eventObj.createdBy &&
-                eventObj.createdBy != localStorage.getItem("userMobile")
+                (eventObj.createdBy &&
+                  eventObj.createdBy != localStorage.getItem("userMobile")) ||
+                (eventObj.createdBy === localStorage.getItem("userMobile") &&
+                  "userRequest" in eventObj &&
+                  eventObj.userRequest.length)
             )
             .map((event: any) => {
               return {
@@ -59,8 +62,7 @@ export class MyadsPage implements OnInit {
                   moment(event.eventDateTime).format("ddd hh:mm") +
                   " IST",
                 eventLocation: event.location,
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                description: event.eventName,
                 eventDate: moment(event.eventDateTime).format("DD MMM YYYY"),
               };
             });

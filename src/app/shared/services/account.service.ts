@@ -69,6 +69,7 @@ export class AccountService {
 
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem("userMobile");
   }
 
   isLoggedIn() {
@@ -117,15 +118,15 @@ export class AccountService {
   // To verify OTP
   verifyOTP(mobileNumber: any, otp: any) {
     const session = sessionStorage.getItem("sessionId");
-    return this.http.get(
-      `${environment.apiUrl}/login/${mobileNumber}/${session}/${otp}`
-    );
-    // .pipe(
-    //   tap((token: any) => {
-    //     // this.userSubject.next()
-    //     console.log(token);
-    //   })
-    // );
+    return this.http
+      .get(`${environment.apiUrl}/login/${mobileNumber}/${session}/${otp}`)
+      .pipe(
+        tap((token: any) => {
+          if (token) {
+            this.userSubject.next(token._id);
+          }
+        })
+      );
   }
 
   // To login with Insta

@@ -29,6 +29,7 @@ export class TinderUIComponent {
     location: string;
     description: string;
     eventDate: string;
+    eventWith: any;
   }>;
 
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
@@ -60,15 +61,15 @@ export class TinderUIComponent {
       slidesPerView: 3,
     };
 
-    this.profiles = [
-      { imgUrl: "assets/images/male-white.svg" },
-      { imgUrl: "assets/images/profile.svg" },
-      { imgUrl: "assets/images/female-white.svg" },
-    ];
+    this.profiles = [];
 
     this.currentAction = "";
     this.previousCard = null;
     this.isLater = false;
+  }
+
+  ionViewWillEnter() {
+    console.log(this.cards);
   }
 
   userClickedButton(event, heart, later, action) {
@@ -277,6 +278,7 @@ export class TinderUIComponent {
     this.tinderCardsArray = this.tinderCards.toArray();
     this.tinderCards.changes.subscribe(() => {
       this.tinderCardsArray = this.tinderCards.toArray();
+      console.log(this.cards);
     });
   }
 

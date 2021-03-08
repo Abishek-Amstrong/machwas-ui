@@ -204,8 +204,6 @@ export class DetailsPage implements OnInit {
   // To navigate to events page upon successful event creation
   navToEvents() {
     const { friendsList, eventTime, location } = this.eventForm.getRawValue();
-    console.log(this.eventForm.getRawValue());
-    console.log(friendsList);
     const params = {
       eventDateTime: eventTime,
       eventWith: friendsList,
@@ -216,15 +214,16 @@ export class DetailsPage implements OnInit {
       eventStatus: "open",
       eventLimit: 3,
     };
+
+    // To create an event
     this.accountService.createEvent(params).subscribe(
       (result) => {
-        // this.activities = result;
+        this.router.navigate(["/", "home", "myads"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));
       }
     );
-    this.router.navigate(["/", "home", "events"]);
   }
 }
 

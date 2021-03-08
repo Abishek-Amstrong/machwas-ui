@@ -31,21 +31,21 @@
             <p class="tinder--card__location">{{ card.location }}</p>
             <p class="tinder--card__description">{{ card.description }}</p>
             <p class="tinder--card__date">{{ card.eventDate }}</p>
-            <div class="slider" [ngClass]="{'slider__icons': profiles.length > 3}">
+            <div class="slider" [ngClass]="{'slider__icons': card.eventWith?.length > 3}">
                 <ion-slides pager="false" [options]="slideOpts" #slider>
-                    <ion-slide class="slide" *ngFor="let profile of profiles">
+                    <ion-slide class="slide" *ngFor="let profile of card.eventWith">
                         <img [src]="profile.imgUrl" alt="Profile" class="slide__img">
                     </ion-slide>
                 </ion-slides>
 
                 <div class="slider__prev ion-activatable ripple-parent" (click)="previousSlide()"
-                    *ngIf="profiles.length > 3">
+                    *ngIf="card.eventWith?.length > 3">
                     <ion-icon color="medium" name="chevron-back-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </div>
 
                 <div class="slider__next ion-activatable ripple-parent" (click)="nextSlide()"
-                    *ngIf="profiles.length > 3">
+                    *ngIf="card.eventWith?.length > 3">
                     <ion-icon color="medium" name="chevron-forward-outline"></ion-icon>
                     <ion-ripple-effect></ion-ripple-effect>
                 </div>

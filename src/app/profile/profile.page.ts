@@ -50,7 +50,6 @@ export class ProfilePage implements OnInit {
   }
 
   nextSlide() {
-    console.log(this.slider);
     this.slider.slideNext();
   }
 
@@ -60,5 +59,10 @@ export class ProfilePage implements OnInit {
 
   navToProfileUpdate() {
     this.router.navigate(["/", "profile", "update"]);
+  }
+
+  // To logout the app
+  logoutApp() {
+    this.accountService.logout();
   }
 }
