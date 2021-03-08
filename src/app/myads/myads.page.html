@@ -45,7 +45,7 @@
     </mat-tab>
     <mat-tab label="Pending Events">
       <div class="events__slider">
-        <swipe-ui [cards]="cards"></swipe-ui>
+        <swipe-ui [cards]="cards" (refreshCards)="refreshPendingEvents($event)"></swipe-ui>
       </div>
     </mat-tab>
   </mat-tab-group>

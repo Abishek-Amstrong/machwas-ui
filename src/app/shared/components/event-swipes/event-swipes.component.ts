@@ -35,6 +35,7 @@ export class TinderUIComponent {
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   @ViewChild("slider") slider: IonSlides;
   tinderCardsArray: Array<ElementRef>;
+  @Output() refreshCards = new EventEmitter();
 
   @Output() choiceMade = new EventEmitter();
   profiles: any;
@@ -228,7 +229,7 @@ export class TinderUIComponent {
       }
 
       const status = this.currentAction === "right" ? "accept" : "reject";
-      console.log(this.previousCard);
+      sessionStorage.setItem("currentMatch", "");
       if (this.previousCard) {
         const request = {
           userId: localStorage.getItem("userMobile"),
@@ -246,6 +247,10 @@ export class TinderUIComponent {
         ) {
           this.accountService.updateAcceptOrReject(request).subscribe(
             (result) => {
+              sessionStorage.setItem(
+                "currentMatch",
+                JSON.stringify(this.previousCard)
+              );
               this.router.navigate(["/", "match"]);
             },
             (err) => {
@@ -255,7 +260,7 @@ export class TinderUIComponent {
         } else {
           this.accountService.updateAcceptOrReject(request).subscribe(
             (result) => {
-              // this.activities = result;
+              this.refreshCards.emit(true);
             },
             (err) => {
               this.toasterService.error(handleError(err));

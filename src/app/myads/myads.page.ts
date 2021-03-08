@@ -119,4 +119,12 @@ export class MyadsPage implements OnInit {
       this.getPendingEvents();
     }
   }
+
+  // To update page if event is rejected in child
+  refreshPendingEvents(event) {
+    console.log(event);
+    if (event) {
+      this.getPendingEvents();
+    }
+  }
 }
