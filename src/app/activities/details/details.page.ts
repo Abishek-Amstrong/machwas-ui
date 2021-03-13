@@ -23,6 +23,7 @@ import { MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
 import { AccountService } from "src/app/shared/services/account.service";
+import { NavController } from "@ionic/angular";
 
 export class User {
   constructor(
@@ -43,14 +44,7 @@ export class User {
 export class DetailsPage implements OnInit {
   eventForm: FormGroup;
   submitted: boolean;
-  friends: any = [
-    // new User("assets/images/male.svg", 17, "Akash Solanki"),
-    // new User("assets/images/female.svg", 22, "Avinash Dubey"),
-    // new User("assets/images/profile.svg", 26, "Nikesh Gupta"),
-    // new User("assets/images/male.svg", 19, "Pawan Kalyan"),
-    // new User("assets/images/female.svg", 21, "Ram Ganesh"),
-    // new User("assets/images/profile.svg", 32, "Rahul Singh"),
-  ];
+  friends: any = [];
   selectedFriends: User[] = new Array<User>();
   filteredFriends: Observable<User[]>;
   lastFilter: string = "";
@@ -65,7 +59,8 @@ export class DetailsPage implements OnInit {
     private bottomSheet: MatBottomSheet,
     private route: ActivatedRoute,
     private accountService: AccountService,
-    private toasterService: ToastrService
+    private toasterService: ToastrService,
+    private navCtrl: NavController
   ) {
     this.submitted = false;
     this.imgUrl = "";
@@ -131,16 +126,23 @@ export class DetailsPage implements OnInit {
       .afterDismissed()
       .subscribe(
         (result) => {
+          console.log(result);
           if (result) {
-            this.friends.push(
-              new User(
-                "assets/images/male.svg",
-                result.age,
-                result.userName,
-                true
-              )
-            );
+            this.friends.push({
+              imgUrl: "assets/images/male.svg",
+              profilePic: "assets/images/male.svg",
+              mobileNo: "",
+              employment: "",
+              email: "",
+              description: "",
+              age: result.age,
+              userName: result.name,
+              selected: true,
+              userDOB: "",
+              _id: 0,
+            });
             this.selectedFriends.push(this.friends[this.friends.length - 1]);
+            console.log(this.selectedFriends);
             this.eventForm.get("friendsList").setValue(this.selectedFriends);
           }
         },
@@ -183,6 +185,7 @@ export class DetailsPage implements OnInit {
 
   // Update user selection upon selecting the user from drop down
   toggleSelection(user: any) {
+    console.log(user);
     user.selected = !user.selected;
     if (user.selected) {
       this.selectedFriends.push(user);
@@ -198,7 +201,7 @@ export class DetailsPage implements OnInit {
 
   // To navigate to pending events page
   displayPendingEvents() {
-    this.router.navigate(["/", "home", "events"]);
+    this.navCtrl.navigateRoot(["/home/events"]);
   }
 
   // To navigate to events page upon successful event creation
@@ -218,7 +221,7 @@ export class DetailsPage implements OnInit {
     // To create an event
     this.accountService.createEvent(params).subscribe(
       (result) => {
-        this.router.navigate(["/", "home", "myads"]);
+        this.navCtrl.navigateRoot(["/home/myads"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));

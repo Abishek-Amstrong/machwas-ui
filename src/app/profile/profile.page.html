@@ -38,7 +38,7 @@
 
     <h1 class="slide__name">{{userInfo.userName | titlecase}}</h1>
     <div class="slide__location">{{userInfo.employment | titlecase}}</div>
-    <div class="slide__about">{{userInfo.description}}</div>
+    <div class="slide__about">{{userInfo.description | titlecase}}</div>
 
     <div class="slide__prev ion-activatable ripple-parent" (click)="previousSlide()">
       <ion-icon color="medium" name="chevron-back-outline"></ion-icon>

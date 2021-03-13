@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "../shared/helpers/error-handler";
 import { AccountService } from "../shared/services/account.service";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "app-match",
@@ -19,7 +20,8 @@ export class MatchPage implements OnInit {
   constructor(
     private accountService: AccountService,
     private toasterService: ToastrService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {
     this.eventData = {};
     this.imgUrl = "assets/images/male.svg";
@@ -60,6 +62,6 @@ export class MatchPage implements OnInit {
 
   // Navigate to chatroom
   navigateToChat() {
-    this.router.navigate(["/", "home", "messaging"]);
+    this.navCtrl.navigateRoot(["/home/messaging"]);
   }
 }

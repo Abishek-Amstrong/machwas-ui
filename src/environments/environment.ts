@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: "https://machwasapp.herokuapp.com/api",
-  apiUrl: "http://localhost:5000/api",
+  apiUrl: "https://machwasapp.herokuapp.com/api",
+  // apiUrl: "http://localhost:5000/api",
 };
 
 /*

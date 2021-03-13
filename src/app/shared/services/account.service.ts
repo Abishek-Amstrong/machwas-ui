@@ -81,7 +81,13 @@ export class AccountService {
   }
 
   register(user: User) {
-    return this.http.post(`${environment.apiUrl}/adduser`, user);
+    return this.http.post(`${environment.apiUrl}/adduser`, user).pipe(
+      tap((token: any) => {
+        if (token) {
+          this.userSubject.next(token._id);
+        }
+      })
+    );
   }
 
   getEventsList() {

@@ -13,8 +13,8 @@ import { IonSlides } from "@ionic/angular";
 import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
-import { filter } from "minimatch";
 import { Router } from "@angular/router";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "swipe-ui",
@@ -54,7 +54,8 @@ export class TinderUIComponent {
     private renderer: Renderer2,
     private accountService: AccountService,
     private toasterService: ToastrService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {
     this.slideOpts = {
       initialSlide: 0,
@@ -251,7 +252,7 @@ export class TinderUIComponent {
                 "currentMatch",
                 JSON.stringify(this.previousCard)
               );
-              this.router.navigate(["/", "match"]);
+              this.navCtrl.navigateRoot(["/match"]);
             },
             (err) => {
               this.toasterService.error(handleError(err));

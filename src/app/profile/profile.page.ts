@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { IonSlides } from "@ionic/angular";
+import { IonSlides, NavController } from "@ionic/angular";
 import { AccountService } from "src/app/shared/services/account.service";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
@@ -19,18 +19,26 @@ export class ProfilePage implements OnInit {
   constructor(
     private accountService: AccountService,
     private toasterService: ToastrService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {
     this.imgUrl = "assets/images/male-white.svg";
     this.slideOpts = {
       initialSlide: 0,
       speed: 400,
     };
+
+    this.getUserInfo();
   }
 
   ngOnInit() {}
 
   ionViewWillEnter() {
+    this.getUserInfo();
+  }
+
+  // To get user details
+  getUserInfo() {
     this.accountService
       .getUsersList(localStorage.getItem("userMobile"))
       .subscribe(
@@ -58,7 +66,7 @@ export class ProfilePage implements OnInit {
   }
 
   navToProfileUpdate() {
-    this.router.navigate(["/", "profile", "update"]);
+    this.navCtrl.navigateRoot(["/profile/update"]);
   }
 
   // To logout the app

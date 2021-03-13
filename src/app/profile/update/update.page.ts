@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NavController } from "@ionic/angular";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { handleError } from "src/app/shared/helpers/error-handler";
@@ -29,7 +30,8 @@ export class UpdatePage implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private toasterService: ToastrService,
-    private compressService: CompressImageService
+    private compressService: CompressImageService,
+    private navCtrl: NavController
   ) {
     this.userName = "";
     this.submitted = false;
@@ -92,10 +94,6 @@ export class UpdatePage implements OnInit {
     return this.form.controls;
   }
 
-  navToActivities() {
-    this.router.navigate(["/", "home", "activities"]);
-  }
-
   // To create a new user
   registerUser() {
     this.submitted = true;
@@ -108,7 +106,7 @@ export class UpdatePage implements OnInit {
     this.accountService.updateProfile(this.form.value).subscribe(
       (result) => {
         this.form.reset();
-        this.router.navigate(["/", "home", "profile"]);
+        this.navCtrl.navigateRoot(["/home/profile"]);
       },
       (err) => {
         this.toasterService.error(handleError(err));
