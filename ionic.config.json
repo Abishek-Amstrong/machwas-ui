@@ -1,7 +1,8 @@
 {
   "name": "machWas-ui",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

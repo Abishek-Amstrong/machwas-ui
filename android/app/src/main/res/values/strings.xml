@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">machWas</string>
-    <string name="title_activity_main">machWas</string>
-    <string name="package_name">com.booking.machWas</string>
-    <string name="custom_url_scheme">com.booking.machWas</string>
-    <string name="facebook_app_id">873250286829616</string>
-    <string name="fb_login_protocol_scheme">fb873250286829616</string>
-</resources>
